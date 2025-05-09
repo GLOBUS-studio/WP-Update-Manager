@@ -1,0 +1,43 @@
+name: DEPLOY
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_MODE: simple
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: set -eu
+
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.GSS }}" > "$HOME/.ssh/key"
+      - run: chmod 600 "$HOME/.ssh/key"
+
+      - name: Rsync files PLUGIN to APP
+        if: env.DEPLOY_MODE == 'simple'
+        run: |
+          cd dist
+          export SSHPASS=${{ secrets.SSH_PASSWORD }}
+          rsync -e "sshpass -e ssh -p 3333 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --update . globus_studio_user@91.90.193.238:/var/www/globus_studio_user/data/www/app.globus.studio/wp-content/plugins/
+
+      - name: Send success message to Telegram
+        if: success()
+        run: |
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+                  -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+                  -d text="🟢 $GITHUB_REPOSITORY [${{ github.event.pusher.name }}] - OK"
+      - name: Send error message to Telegram
+        if: failure()
+        run: |
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d text="🔴 $GITHUB_REPOSITORY [${{ github.event.pusher.name }}] - ERROR"
