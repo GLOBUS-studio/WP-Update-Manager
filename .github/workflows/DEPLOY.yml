@@ -15,7 +15,7 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
 
-      - run: mkdir "$HOME/.ssh"
+      - run: mkdir -p "$HOME/.ssh"
       - run: echo "${{ secrets.GSS }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
 
