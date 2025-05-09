@@ -85,7 +85,8 @@ class Complete_Updates_Manager_Admin {
                 padding-top: 7px;
             }
             .plugins .wum-settings {
-                color:rgb(46, 173, 232);
+                color:rgb(139, 13, 13);
+                font-weight: bold;
             }'
         );
     }
