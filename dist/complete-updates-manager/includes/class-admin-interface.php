@@ -78,14 +78,14 @@ class Complete_Updates_Manager_Admin {
     public function enqueue_admin_styles() {
         wp_add_inline_style('admin-bar', 
             '.wp-admin-bar-wum-notice { 
-                background-color: rgba(190, 0, 0, 0.4) !important; 
+                background-color: rgba(255, 37, 37, 0.4) !important; 
             } 
             .wp-admin-bar-wum-notice .dashicons { 
                 font-family: dashicons !important;
                 padding-top: 7px;
             }
             .plugins .wum-settings {
-                color: #0073aa;
+                color:rgb(46, 173, 232);
             }'
         );
     }
@@ -103,7 +103,7 @@ class Complete_Updates_Manager_Admin {
                           
         // Add status link
         $status_link = '<span class="wum-settings">' . 
-                       esc_html__('All updates disabled', 'complete-updates-manager') . '</span>';
+                       esc_html__('Updates disabled', 'complete-updates-manager') . '</span>';
         
         // Add documentation link
         $docs_link = '<a href="https://globus.studio" target="_blank">' . 
