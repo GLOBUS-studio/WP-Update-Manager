@@ -1,10 +1,4 @@
 <?php
-/**
- * Admin Interface Manager Class
- *
- * @package    WordPress_Plugins
- * @subpackage Complete_Updates_Manager
- */
 
 if (!defined('ABSPATH')) {
     exit;

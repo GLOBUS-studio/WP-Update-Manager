@@ -1,10 +1,4 @@
 <?php
-/**
- * Helper functions for Complete Updates Manager
- *
- * @package    WordPress_Plugins
- * @subpackage Complete_Updates_Manager
- */
 
 if (!defined('ABSPATH')) {
     exit;
