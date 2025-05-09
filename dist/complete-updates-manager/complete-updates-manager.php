@@ -42,6 +42,7 @@ function wum_requirements_check() {
             <div class="notice notice-error">
                 <p>
                     <?php printf(
+                        /* translators: %1$s: minimum PHP version required, %2$s: current PHP version */
                         esc_html__('Complete Updates Manager requires PHP version %1$s or later. You are running version %2$s. Please upgrade PHP or disable the plugin.', 'complete-updates-manager'),
                         esc_html(WUM_MIN_PHP_VERSION),
                         esc_html($php_version)
@@ -59,6 +60,7 @@ function wum_requirements_check() {
             <div class="notice notice-error">
                 <p>
                     <?php printf(
+                        /* translators: %1$s: minimum PHP version required, %2$s: current PHP version */
                         esc_html__('Complete Updates Manager requires WordPress version %1$s or later. You are running version %2$s. Please upgrade WordPress or disable the plugin.', 'complete-updates-manager'),
                         esc_html(WUM_MIN_WP_VERSION),
                         esc_html($wp_version)
