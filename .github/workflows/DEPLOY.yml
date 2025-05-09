@@ -8,9 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      DEPLOY_MODE: simple
-
     steps:
       - uses: actions/checkout@v2
       - run: set -eu
@@ -23,7 +20,6 @@ jobs:
       - run: chmod 600 "$HOME/.ssh/key"
 
       - name: Rsync files PLUGIN to APP
-        if: env.DEPLOY_MODE == 'simple'
         run: |
           cd dist
           export SSHPASS=${{ secrets.SSH_PASSWORD }}
