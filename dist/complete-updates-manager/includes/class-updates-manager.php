@@ -313,34 +313,56 @@ class Complete_Updates_Manager {
      */
     private function disable_automatic_updates() {
         // Disable all types of automatic updates via filters
+
+        // Disable automatic translation updates
         add_filter('auto_update_translation', '__return_false');
+
+        // Completely disable the automatic updater system
         add_filter('automatic_updater_disabled', '__return_true');
+
+        // Disable minor core updates (security/maintenance releases)
         add_filter('allow_minor_auto_core_updates', '__return_false');
+
+        // Disable major core updates (feature releases)
         add_filter('allow_major_auto_core_updates', '__return_false');
+
+        // Disable development core updates (nightly/beta/RC)
         add_filter('allow_dev_auto_core_updates', '__return_false');
+
+        // Disable all core auto-updates
         add_filter('auto_update_core', '__return_false');
+
+        // Disable core auto-updates (alternative filter)
         add_filter('wp_auto_update_core', '__return_false');
         
-        // Disable email notifications about updates
+        // Disable email notifications about core updates
         add_filter('auto_core_update_send_email', '__return_false');
+
+        // Disable email notifications about available core updates
         add_filter('send_core_update_notification_email', '__return_false');
         
-        // Disable auto-updates for plugins and themes
+        // Disable auto-updates for plugins
         add_filter('auto_update_plugin', '__return_false');
+
+        // Disable auto-updates for themes
         add_filter('auto_update_theme', '__return_false');
         
-        // Disable debug email messages
+        // Disable debug email messages for automatic updates
         add_filter('automatic_updates_send_debug_email', '__return_false');
+
+        // Always treat the install as being under version control (disables auto-updates)
         add_filter('automatic_updates_is_vcs_checkout', '__return_true');
+
+        // (Typo: extra space in filter name) Attempt to disable debug email messages for automatic updates with priority 1
         add_filter('automatic_updates_send_debug_email ', '__return_false', 1);
         
         // Remove scheduled update check actions
         remove_action('init', 'wp_schedule_update_checks');
         
-        // Remove all plugin API filters
+        // Remove all plugin API filters (prevents plugin update checks)
         remove_all_filters('plugins_api');
     }
-    
+
     /**
      * Disable theme updates
      *
@@ -349,18 +371,23 @@ class Complete_Updates_Manager {
      * @return void
      */
     private function disable_theme_updates() {
-        // Disable for WordPress 2.8 - 3.0
+        // Remove theme update check when loading the themes page (WP 2.8 - 3.0)
         remove_action('load-themes.php', 'wp_update_themes');
+        // Remove theme update check when loading the update page (WP 2.8 - 3.0)
         remove_action('load-update.php', 'wp_update_themes');
+        // Remove maybe update themes action on admin init (WP 2.8 - 3.0)
         remove_action('admin_init', '_maybe_update_themes');
+        // Remove scheduled theme update check (WP 2.8 - 3.0)
         remove_action('wp_update_themes', 'wp_update_themes');
+        // Clear scheduled theme update hook (WP 2.8 - 3.0)
         wp_clear_scheduled_hook('wp_update_themes');
         
-        // Disable for WordPress 3.0+
+        // Remove theme update check when loading update-core.php (WP 3.0+)
         remove_action('load-update-core.php', 'wp_update_themes');
+        // Clear scheduled theme update hook again for newer WP
         wp_clear_scheduled_hook('wp_update_themes');
         
-        // Additionally: disable theme update information
+        // Disable theme update information in options
         add_filter('pre_option_theme_updates', '__return_empty_array');
     }
     
@@ -372,18 +399,23 @@ class Complete_Updates_Manager {
      * @return void
      */
     private function disable_plugin_updates() {
-        // Disable for WordPress 2.8 - 3.0
+        // Remove plugin update check when loading the plugins page (WP 2.8 - 3.0)
         remove_action('load-plugins.php', 'wp_update_plugins');
+        // Remove plugin update check when loading the update page (WP 2.8 - 3.0)
         remove_action('load-update.php', 'wp_update_plugins');
+        // Remove maybe update plugins action on admin init (WP 2.8 - 3.0)
         remove_action('admin_init', '_maybe_update_plugins');
+        // Remove scheduled plugin update check (WP 2.8 - 3.0)
         remove_action('wp_update_plugins', 'wp_update_plugins');
+        // Clear scheduled plugin update hook (WP 2.8 - 3.0)
         wp_clear_scheduled_hook('wp_update_plugins');
         
-        // Disable for WordPress 3.0+
+        // Remove plugin update check when loading update-core.php (WP 3.0+)
         remove_action('load-update-core.php', 'wp_update_plugins');
+        // Clear scheduled plugin update hook again for newer WP
         wp_clear_scheduled_hook('wp_update_plugins');
         
-        // Additionally: disable plugin update information
+        // Disable plugin update information in options
         add_filter('pre_option_plugin_updates', '__return_empty_array');
     }
     
@@ -395,25 +427,28 @@ class Complete_Updates_Manager {
      * @return void
      */
     private function disable_core_updates() {
-        // Disable for WordPress 2.8 - 3.0
+        // Disable core update information in options (WP 2.8 - 3.0)
         add_filter('pre_option_update_core', '__return_null');
+        // Remove scheduled core version check (WP 2.8 - 3.0)
         remove_action('wp_version_check', 'wp_version_check');
+        // Remove maybe update core action on admin init (WP 2.8 - 3.0)
         remove_action('admin_init', '_maybe_update_core');
+        // Clear scheduled core version check hook (WP 2.8 - 3.0)
         wp_clear_scheduled_hook('wp_version_check');
         
-        // Disable for WordPress 3.0+
+        // Clear scheduled core version check hook again for newer WP (WP 3.0+)
         wp_clear_scheduled_hook('wp_version_check');
         
-        // Disable for WordPress 3.7+ (automatic updates)
+        // Remove automatic update actions (WP 3.7+)
         remove_action('wp_maybe_auto_update', 'wp_maybe_auto_update');
         remove_action('admin_init', 'wp_maybe_auto_update');
         remove_action('admin_init', 'wp_auto_update_core');
         wp_clear_scheduled_hook('wp_maybe_auto_update');
         
-        // Disable API access
+        // Remove all plugin API filters to prevent update checks
         remove_all_filters('plugins_api');
         
-        // Additionally: hide notifications about available updates
+        // Additionally: hide notifications about available core updates
         add_filter('pre_option_update_core', '__return_null');
         add_filter('pre_site_transient_update_core', '__return_null');
     }
