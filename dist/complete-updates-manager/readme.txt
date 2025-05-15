@@ -1,5 +1,5 @@
 === Complete Update Manager ===
-Tags: disable updates, update control, security, wordpress updates, plugins updates, themes updates
+Tags: disable updates, update control, wordpress updates, plugins updates, themes updates
 Requires at least: 3.8
 Tested up to: 6.8
 Requires PHP: 7.4

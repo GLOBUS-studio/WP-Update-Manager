@@ -41,15 +41,12 @@ class Complete_Updates_Manager {
         // Filter transients before they are set
         // to prevent update checks
         add_filter('pre_transient_update_themes', [$this, 'override_version_check']);
-        //add_filter('pre_site_transient_update_themes', [$this, 'override_version_check']); // TODO
+
         add_filter('pre_transient_update_plugins', [$this, 'override_version_check']);
-        //add_filter('pre_site_transient_update_plugins', [$this, 'override_version_check']); // TODO
+
         add_filter('pre_transient_update_core', [$this, 'override_version_check']);
         add_filter('pre_site_transient_update_core', [$this, 'override_version_check']);
         
-        // Priority 21 ensures our filter runs after standard WordPress checks
-        //add_action('pre_set_site_transient_update_plugins', [$this, 'override_version_check'], 21); // TODO
-        //add_action('pre_set_site_transient_update_themes', [$this, 'override_version_check'], 21); // TODO
 
         // Filter cron events and block HTTP requests to update API
         add_action('schedule_event', [$this, 'filter_cron_events']);
@@ -340,9 +337,6 @@ class Complete_Updates_Manager {
 
         // Disable email notifications about available core updates
         add_filter('send_core_update_notification_email', '__return_false');
-        
-        // Disable auto-updates for plugins
-        //add_filter('auto_update_plugin', '__return_false'); // TODO
 
         // Disable auto-updates for themes
         add_filter('auto_update_theme', '__return_false');
