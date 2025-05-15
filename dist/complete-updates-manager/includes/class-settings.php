@@ -9,14 +9,14 @@ if (!defined('ABSPATH')) {
  *
  * Handles settings page and functionality
  *
- * @since 1.0.0
+ * @since 1.0.1
  */
 class Complete_Updates_Manager_Settings {
 
     /**
      * Default settings
      *
-     * @since 1.0.0
+     * @since 1.0.1
      * @var array
      */
     private $default_settings = [
@@ -30,7 +30,7 @@ class Complete_Updates_Manager_Settings {
     /**
      * Initialize the settings functionality
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function initialize() {
@@ -50,7 +50,7 @@ class Complete_Updates_Manager_Settings {
     /**
      * Register settings page under Settings menu
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function register_settings_menu() {
@@ -66,7 +66,7 @@ class Complete_Updates_Manager_Settings {
     /**
      * Register plugin settings
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function register_settings() {
@@ -192,7 +192,7 @@ class Complete_Updates_Manager_Settings {
     /**
      * Render the general section description
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function render_general_section() {
@@ -202,7 +202,7 @@ class Complete_Updates_Manager_Settings {
     /**
      * Render the security section description
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function render_security_section() {
@@ -255,7 +255,7 @@ class Complete_Updates_Manager_Settings {
     /**
      * Render the settings page
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function render_settings_page() {
@@ -304,7 +304,7 @@ class Complete_Updates_Manager_Settings {
     /**
      * Check for security updates
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function check_security_updates() {
@@ -323,7 +323,7 @@ class Complete_Updates_Manager_Settings {
     /**
      * Fetch security updates from WordPress API
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     private function fetch_security_updates() {
@@ -405,7 +405,7 @@ class Complete_Updates_Manager_Settings {
     /**
      * Display security update notices
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function display_security_notices() {

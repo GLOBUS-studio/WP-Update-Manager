@@ -1,9 +1,9 @@
-=== WP Update Manager ===
+=== Complete Update Manager ===
 Tags: disable updates, update control, security, wordpress updates, plugins updates, themes updates
 Requires at least: 3.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,7 +11,7 @@ Advanced tool to fully disable WordPress theme, plugin and core update checking,
 
 == Description ==
 
-The WP Update Manager plugin provides a robust solution to disable the WordPress update checking system. It prevents WordPress from checking for updates including cronjobs, and suppresses all update-related notifications in the admin area.
+The Complete Update Manager plugin provides a robust solution to disable the WordPress update checking system. It prevents WordPress from checking for updates including cronjobs, and suppresses all update-related notifications in the admin area.
 
 **Key Features:**
 

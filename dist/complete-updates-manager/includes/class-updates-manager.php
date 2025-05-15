@@ -10,14 +10,14 @@ if (!defined('ABSPATH')) {
  * Main class that manages complete disabling of WordPress updates.
  * Disables all core, plugin, theme updates and update notifications.
  *
- * @since 1.0.0
+ * @since 1.0.1
  */
 class Complete_Updates_Manager {
 
     /**
      * Plugin settings
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @var array
      */
     private $settings;
@@ -28,7 +28,7 @@ class Complete_Updates_Manager {
      * Registers all necessary hooks and filters to disable updates
      * in different parts of WordPress.
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function initialize() {
@@ -41,15 +41,15 @@ class Complete_Updates_Manager {
         // Filter transients before they are set
         // to prevent update checks
         add_filter('pre_transient_update_themes', [$this, 'override_version_check']);
-        add_filter('pre_site_transient_update_themes', [$this, 'override_version_check']);
+        //add_filter('pre_site_transient_update_themes', [$this, 'override_version_check']); // TODO
         add_filter('pre_transient_update_plugins', [$this, 'override_version_check']);
-        add_filter('pre_site_transient_update_plugins', [$this, 'override_version_check']);
+        //add_filter('pre_site_transient_update_plugins', [$this, 'override_version_check']); // TODO
         add_filter('pre_transient_update_core', [$this, 'override_version_check']);
         add_filter('pre_site_transient_update_core', [$this, 'override_version_check']);
         
         // Priority 21 ensures our filter runs after standard WordPress checks
-        add_action('pre_set_site_transient_update_plugins', [$this, 'override_version_check'], 21);
-        add_action('pre_set_site_transient_update_themes', [$this, 'override_version_check'], 21);
+        //add_action('pre_set_site_transient_update_plugins', [$this, 'override_version_check'], 21); // TODO
+        //add_action('pre_set_site_transient_update_themes', [$this, 'override_version_check'], 21); // TODO
 
         // Filter cron events and block HTTP requests to update API
         add_action('schedule_event', [$this, 'filter_cron_events']);
@@ -65,7 +65,7 @@ class Complete_Updates_Manager {
     /**
      * Get plugin settings
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return array Plugin settings
      */
     private function get_settings() {
@@ -93,7 +93,7 @@ class Complete_Updates_Manager {
      * Disables various update checks and notifications in the admin panel,
      * including maintenance notifications, checks in the Site Health tool, etc.
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function disable_updates_admin_init() {
@@ -342,7 +342,7 @@ class Complete_Updates_Manager {
         add_filter('send_core_update_notification_email', '__return_false');
         
         // Disable auto-updates for plugins
-        add_filter('auto_update_plugin', '__return_false');
+        //add_filter('auto_update_plugin', '__return_false'); // TODO
 
         // Disable auto-updates for themes
         add_filter('auto_update_theme', '__return_false');
@@ -458,7 +458,7 @@ class Complete_Updates_Manager {
      *
      * Removes or hides menu items and interface elements related to updates
      *
-     * @since 1.0.0
+     * @since 1.0.1
      * @return void
      */
     public function hide_update_ui() {

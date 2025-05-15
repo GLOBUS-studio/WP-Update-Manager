@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Update Manager\n"
+"Project-Id-Version: Complete Update Manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-15 15:04+0000\n"
 "PO-Revision-Date: 2025-05-15 15:10+0000\n"
@@ -209,7 +209,7 @@ msgid "WordPress Core Updates"
 msgstr "Обновления ядра WordPress"
 
 #. Name of the plugin
-msgid "WP Update Manager"
+msgid "Complete Update Manager"
 msgstr "Менеджер обновлений WP"
 
 #. Author of the plugin

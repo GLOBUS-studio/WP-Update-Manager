@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 /**
  * Check if the current user has the capability to manage plugin settings
  *
- * @since  1.0.0
+ * @since  1.0.1
  * @return boolean True if user can manage settings, false otherwise
  */
 function wum_current_user_can_manage() {
@@ -17,7 +17,7 @@ function wum_current_user_can_manage() {
 /**
  * Get plugin settings URL
  *
- * @since  1.0.0
+ * @since  1.0.1
  * @return string Settings page URL
  */
 function wum_get_settings_url() {
@@ -27,7 +27,7 @@ function wum_get_settings_url() {
 /**
  * Simple logging function for debugging
  *
- * @since  1.0.0
+ * @since  1.0.1
  * @param  mixed  $data       Data to log
  * @param  string $log_type   Type of log data (error, info, debug)
  * @return void
@@ -45,7 +45,7 @@ function wum_log($data, $log_type = 'info') {
 /**
  * Get plugin version
  *
- * @since  1.0.0
+ * @since  1.0.1
  * @return string Plugin version
  */
 function wum_get_version() {
@@ -55,7 +55,7 @@ function wum_get_version() {
 /**
  * Check if specific update type is disabled
  *
- * @since  1.0.0
+ * @since  1.0.1
  * @param  string $type Update type (core, plugin, theme)
  * @return boolean True if update type is disabled
  */
@@ -77,7 +77,7 @@ function wum_is_update_disabled($type) {
 /**
  * Check if security monitoring is enabled
  * 
- * @since 1.0.0
+ * @since 1.0.1
  * @return boolean True if security monitoring is enabled
  */
 function wum_is_security_monitoring_enabled() {
@@ -93,7 +93,7 @@ function wum_is_security_monitoring_enabled() {
 /**
  * Verify nonce for settings forms
  *
- * @since 1.0.0
+ * @since 1.0.1
  * @param string $nonce Nonce value
  * @param string $action Nonce action
  * @return boolean True if nonce is valid
@@ -108,7 +108,7 @@ function wum_verify_nonce($nonce, $action) {
 /**
  * Plugin activation hook callback
  * 
- * @since  1.0.0
+ * @since  1.0.1
  * @return void
  */
 function wum_plugin_activation() {
@@ -136,7 +136,7 @@ function wum_plugin_activation() {
 /**
  * Plugin deactivation hook callback
  * 
- * @since  1.0.0
+ * @since  1.0.1
  * @return void
  */
 function wum_plugin_deactivation() {

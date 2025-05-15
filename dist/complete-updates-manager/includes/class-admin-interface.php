@@ -9,14 +9,14 @@ if (!defined('ABSPATH')) {
  *
  * Handles all admin interface related functionality
  *
- * @since 1.0.0
+ * @since 1.0.1
  */
 class Complete_Updates_Manager_Admin {
 
     /**
      * Initialize the admin functionality
      *
-     * @since  1.0.0
+     * @since  1.0.1
      * @return void
      */
     public function initialize() {
