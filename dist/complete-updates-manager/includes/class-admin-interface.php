@@ -107,7 +107,7 @@ class Complete_Updates_Manager_Admin {
                        esc_html__('Updates disabled', 'complete-updates-manager') . '</span>';
         
         // Add documentation link
-        $docs_link = '<a href="https://globus.studio" target="_blank">' . 
+        $docs_link = '<a href="https://globus.studio/wp-update-manager-disable-all-wordpress-updates-with-full-control/" target="_blank">' . 
                     esc_html__('Documentation', 'complete-updates-manager') . '</a>';
         
         // Make our links appear first

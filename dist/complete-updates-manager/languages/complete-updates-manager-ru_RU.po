@@ -1,0 +1,223 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Update Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-15 15:04+0000\n"
+"PO-Revision-Date: 2025-05-15 15:10+0000\n"
+"Last-Translator: \n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.2; wp-6.8.1\n"
+"X-Domain: complete-updates-manager"
+
+#. %s: Name of the plugin
+#: includes/class-admin-interface.php:66
+#, php-format
+msgid "\"%s\" plugin is active - updates are disabled"
+msgstr "Плагин \"%s\" активен - обновления отключены"
+
+#. Description of the plugin
+msgid ""
+"Advanced tool to fully disable WordPress theme, plugin and core update "
+"checking, related cronjobs and notifications."
+msgstr ""
+"Расширенный инструмент для полного отключения проверки обновлений тем, "
+"плагинов и ядра WordPress, связанных с ними cron-заданий и уведомлений."
+
+#: includes/class-settings.php:154
+msgid "Check Frequency"
+msgstr "Частота проверки"
+
+#. %1$s: minimum PHP version required, %2$s: current PHP version
+#: complete-updates-manager.php:46
+#, php-format
+msgid ""
+"Complete Updates Manager requires PHP version %1$s or later. You are running "
+"version %2$s. Please upgrade PHP or disable the plugin."
+msgstr ""
+"Complete Updates Manager требует PHP версии %1$s или более поздней. Вы "
+"используете версию %2$s. Пожалуйста, обновите PHP или отключите плагин."
+
+#. %1$s: minimum PHP version required, %2$s: current PHP version
+#: complete-updates-manager.php:64
+#, php-format
+msgid ""
+"Complete Updates Manager requires WordPress version %1$s or later. You are "
+"running version %2$s. Please upgrade WordPress or disable the plugin."
+msgstr ""
+"Complete Updates Manager требует WordPress версии %1$s или более поздней. Вы "
+"используете версию %2$s. Пожалуйста, обновите WordPress или отключите плагин."
+
+#: includes/class-settings.php:209
+msgid "Configure security monitoring options while updates are disabled."
+msgstr ""
+"Настройте параметры мониторинга безопасности при отключенных обновлениях."
+
+#: includes/class-settings.php:199
+msgid "Configure which WordPress update functionality should be disabled."
+msgstr "Настройте, какие функции обновления WordPress следует отключить."
+
+#: includes/class-settings.php:428
+msgid "Consider temporarily enabling updates to apply these security fixes."
+msgstr ""
+"Рассмотрите возможность временного включения обновлений для применения этих "
+"исправлений безопасности."
+
+#: includes/class-settings.php:162
+msgid "Daily"
+msgstr "Ежедневно"
+
+#: includes/class-settings.php:110
+msgid "Disable plugin updates"
+msgstr "Отключить обновления плагинов"
+
+#: includes/class-settings.php:124
+msgid "Disable theme updates"
+msgstr "Отключить обновления темы"
+
+#: includes/class-settings.php:96
+msgid "Disable WordPress core updates"
+msgstr "Отключить обновления ядра WordPress"
+
+#: includes/class-settings.php:278
+msgid ""
+"Disabling updates may expose your site to security vulnerabilities. Use this "
+"plugin with caution and check for important security updates regularly."
+msgstr ""
+"Отключение обновлений может подвергнуть ваш сайт уязвимостям безопасности. "
+"Используйте этот плагин с осторожностью и регулярно проверяйте наличие "
+"важных обновлений безопасности."
+
+#: includes/class-admin-interface.php:111
+msgid "Documentation"
+msgstr "Документация"
+
+#: includes/class-settings.php:420
+msgid ""
+"Even though updates are disabled, the following security issues were "
+"detected:"
+msgstr ""
+"Несмотря на то, что обновления отключены, были обнаружены следующие проблемы "
+"безопасности:"
+
+#: includes/class-settings.php:147
+msgid ""
+"Even with updates disabled, check for and notify about critical security "
+"updates"
+msgstr ""
+"Даже при отключенных обновлениях проверяйте наличие критических обновлений "
+"безопасности и уведомляйте о них"
+
+#: includes/class-settings.php:160
+msgid "How often to check for security updates"
+msgstr "Как часто проверять наличие обновлений безопасности"
+
+#. URI of the plugin
+msgid "https://globus.studio"
+msgstr "https://globus.studio"
+
+#. Author URI of the plugin
+msgid "https://leonidov.dev"
+msgstr "https://leonidov.dev"
+
+#: includes/class-settings.php:277
+msgid "Important Security Notice"
+msgstr "Важное уведомление о безопасности"
+
+#: includes/class-settings.php:419
+msgid "Important WordPress Security Updates"
+msgstr "Важные обновления безопасности WordPress"
+
+#: includes/class-settings.php:146
+msgid "Monitor for security updates"
+msgstr "Следите за обновлениями безопасности"
+
+#: includes/class-settings.php:104
+msgid "Plugin Updates"
+msgstr "Обновления плагинов"
+
+#: includes/class-settings.php:97
+msgid "Prevents WordPress from checking for core updates"
+msgstr "Не позволяет WordPress проверять наличие обновлений ядра"
+
+#: includes/class-settings.php:111
+msgid "Prevents WordPress from checking for plugin updates"
+msgstr "Запрещает WordPress проверять наличие обновлений плагинов"
+
+#: includes/class-settings.php:125
+msgid "Prevents WordPress from checking for theme updates"
+msgstr "Не позволяет WordPress проверять наличие обновлений темы"
+
+#: includes/class-settings.php:273
+msgid "Save Settings"
+msgstr "Сохранить настройки"
+
+#: includes/class-settings.php:132
+msgid "Security Monitoring"
+msgstr "Мониторинг безопасности"
+
+#. %s: Plugin name
+#: includes/class-settings.php:388
+#, php-format
+msgid "Security update available for plugin: %s"
+msgstr "Доступно обновление безопасности для плагина: %s"
+
+#: includes/class-settings.php:140
+msgid "Security Update Monitoring"
+msgstr "Мониторинг обновлений безопасности"
+
+#: includes/class-admin-interface.php:103
+msgid "Settings"
+msgstr "Настройки"
+
+#: includes/class-settings.php:118
+msgid "Theme Updates"
+msgstr "Обновления темы"
+
+#: includes/class-settings.php:82
+msgid "Update Control Settings"
+msgstr "Настройки управления обновлениями"
+
+#: includes/class-admin-interface.php:60
+msgid "Updates Disabled"
+msgstr "Обновления отключены"
+
+#: includes/class-admin-interface.php:107
+msgid "Updates disabled"
+msgstr "Обновления отключены"
+
+#: includes/class-settings.php:59
+msgid "Updates Manager"
+msgstr "Менеджер обновлений"
+
+#: includes/class-settings.php:58
+msgid "Updates Manager Settings"
+msgstr "Настройки менеджера обновлений"
+
+#: includes/class-settings.php:163
+msgid "Weekly"
+msgstr "Еженедельно"
+
+#: includes/class-settings.php:90
+msgid "WordPress Core Updates"
+msgstr "Обновления ядра WordPress"
+
+#. Name of the plugin
+msgid "WP Update Manager"
+msgstr "Менеджер обновлений WP"
+
+#. Author of the plugin
+msgid "Yevhen Leonidov"
+msgstr "Евгений Леонидов"
+
+#. %s: WordPress version
+#: includes/class-settings.php:365
+#, php-format
+msgid "Your WordPress version (%s) has known security issues."
+msgstr "Ваша версия WordPress (%s) имеет известные проблемы безопасности."

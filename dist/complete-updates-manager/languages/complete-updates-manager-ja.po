@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Update Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-15 15:04+0000\n"
+"PO-Revision-Date: 2025-05-15 16:03+0000\n"
+"Last-Translator: \n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.2; wp-6.8.1\n"
+"X-Domain: complete-updates-manager"
+
+#. %s: Name of the plugin
+#: includes/class-admin-interface.php:66
+#, php-format
+msgid "\"%s\" plugin is active - updates are disabled"
+msgstr "「%s」プラグインはアクティブです - 更新は無効です"
+
+#. Description of the plugin
+msgid ""
+"Advanced tool to fully disable WordPress theme, plugin and core update "
+"checking, related cronjobs and notifications."
+msgstr "WordPress テーマ、プラグイン、コア更新のチェック、関連する cronjobs および通知を完全に無効にする高度なツール。"
+
+#: includes/class-settings.php:154
+msgid "Check Frequency"
+msgstr "チェック頻度"
+
+#. %1$s: minimum PHP version required, %2$s: current PHP version
+#: complete-updates-manager.php:46
+#, php-format
+msgid ""
+"Complete Updates Manager requires PHP version %1$s or later. You are running "
+"version %2$s. Please upgrade PHP or disable the plugin."
+msgstr ""
+"Complete Updates Manager には PHP バージョン %1$s 以降が必要です。現在実行されているバージョンは %2$s "
+"です。PHP をアップグレードするか、プラグインを無効にしてください。"
+
+#. %1$s: minimum PHP version required, %2$s: current PHP version
+#: complete-updates-manager.php:64
+#, php-format
+msgid ""
+"Complete Updates Manager requires WordPress version %1$s or later. You are "
+"running version %2$s. Please upgrade WordPress or disable the plugin."
+msgstr ""
+"Complete Updates Manager を使用するには、WordPress バージョン %1$s "
+"以降が必要です。現在実行されているバージョンは %2$s です。WordPress をアップグレードするか、プラグインを無効にしてください。"
+
+#: includes/class-settings.php:209
+msgid "Configure security monitoring options while updates are disabled."
+msgstr "更新が無効になっている間のセキュリティ監視オプションを構成します。"
+
+#: includes/class-settings.php:199
+msgid "Configure which WordPress update functionality should be disabled."
+msgstr "無効にする WordPress 更新機能を設定します。"
+
+#: includes/class-settings.php:428
+msgid "Consider temporarily enabling updates to apply these security fixes."
+msgstr "これらのセキュリティ修正を適用するには、一時的に更新を有効にすることを検討してください。"
+
+#: includes/class-settings.php:162
+msgid "Daily"
+msgstr "毎日"
+
+#: includes/class-settings.php:110
+msgid "Disable plugin updates"
+msgstr "プラグインの更新を無効にする"
+
+#: includes/class-settings.php:124
+msgid "Disable theme updates"
+msgstr "テーマの更新を無効にする"
+
+#: includes/class-settings.php:96
+msgid "Disable WordPress core updates"
+msgstr "WordPressコアアップデートを無効にする"
+
+#: includes/class-settings.php:278
+msgid ""
+"Disabling updates may expose your site to security vulnerabilities. Use this "
+"plugin with caution and check for important security updates regularly."
+msgstr ""
+"アップデートを無効にすると、サイトがセキュリティ上の脆弱性にさらされる可能性があります。このプラグインは慎重に使用し、重要なセキュリティアップデートを定期的に確認してください。"
+
+#: includes/class-admin-interface.php:111
+msgid "Documentation"
+msgstr "ドキュメント"
+
+#: includes/class-settings.php:420
+msgid ""
+"Even though updates are disabled, the following security issues were "
+"detected:"
+msgstr "更新が無効になっているにもかかわらず、次のセキュリティ問題が検出されました。"
+
+#: includes/class-settings.php:147
+msgid ""
+"Even with updates disabled, check for and notify about critical security "
+"updates"
+msgstr "アップデートを無効にしている場合でも、重要なセキュリティアップデートをチェックして通知します"
+
+#: includes/class-settings.php:160
+msgid "How often to check for security updates"
+msgstr "セキュリティアップデートを確認する頻度"
+
+#. URI of the plugin
+msgid "https://globus.studio"
+msgstr "https://globus.studio"
+
+#. Author URI of the plugin
+msgid "https://leonidov.dev"
+msgstr "https://leonidov.dev"
+
+#: includes/class-settings.php:277
+msgid "Important Security Notice"
+msgstr "重要なセキュリティに関するお知らせ"
+
+#: includes/class-settings.php:419
+msgid "Important WordPress Security Updates"
+msgstr "重要なWordPressセキュリティアップデート"
+
+#: includes/class-settings.php:146
+msgid "Monitor for security updates"
+msgstr "セキュリティアップデートを監視する"
+
+#: includes/class-settings.php:104
+msgid "Plugin Updates"
+msgstr "プラグインの更新"
+
+#: includes/class-settings.php:97
+msgid "Prevents WordPress from checking for core updates"
+msgstr "WordPressがコアアップデートをチェックしないようにする"
+
+#: includes/class-settings.php:111
+msgid "Prevents WordPress from checking for plugin updates"
+msgstr "WordPressがプラグインの更新をチェックしないようにする"
+
+#: includes/class-settings.php:125
+msgid "Prevents WordPress from checking for theme updates"
+msgstr "WordPressがテーマの更新をチェックしないようにする"
+
+#: includes/class-settings.php:273
+msgid "Save Settings"
+msgstr "設定を保存"
+
+#: includes/class-settings.php:132
+msgid "Security Monitoring"
+msgstr "セキュリティ監視"
+
+#. %s: Plugin name
+#: includes/class-settings.php:388
+#, php-format
+msgid "Security update available for plugin: %s"
+msgstr "プラグインのセキュリティアップデートが利用可能です: %s"
+
+#: includes/class-settings.php:140
+msgid "Security Update Monitoring"
+msgstr "セキュリティアップデート監視"
+
+#: includes/class-admin-interface.php:103
+msgid "Settings"
+msgstr "設定"
+
+#: includes/class-settings.php:118
+msgid "Theme Updates"
+msgstr "テーマの更新"
+
+#: includes/class-settings.php:82
+msgid "Update Control Settings"
+msgstr "制御設定の更新"
+
+#: includes/class-admin-interface.php:60
+msgid "Updates Disabled"
+msgstr "更新が無効"
+
+#: includes/class-admin-interface.php:107
+msgid "Updates disabled"
+msgstr "更新が無効になっています"
+
+#: includes/class-settings.php:59
+msgid "Updates Manager"
+msgstr "アップデートマネージャー"
+
+#: includes/class-settings.php:58
+msgid "Updates Manager Settings"
+msgstr "アップデートマネージャーの設定"
+
+#: includes/class-settings.php:163
+msgid "Weekly"
+msgstr "週刊"
+
+#: includes/class-settings.php:90
+msgid "WordPress Core Updates"
+msgstr "WordPressコアアップデート"
+
+#. Name of the plugin
+msgid "WP Update Manager"
+msgstr "WP アップデートマネージャー"
+
+#. Author of the plugin
+msgid "Yevhen Leonidov"
+msgstr "イェフヘン・レオニドフ"
+
+#. %s: WordPress version
+#: includes/class-settings.php:365
+#, php-format
+msgid "Your WordPress version (%s) has known security issues."
+msgstr "お使いの WordPress バージョン (%s) には既知のセキュリティ問題があります。"

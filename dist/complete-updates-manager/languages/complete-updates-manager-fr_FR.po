@@ -1,0 +1,228 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Update Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-15 15:04+0000\n"
+"PO-Revision-Date: 2025-05-15 16:04+0000\n"
+"Last-Translator: \n"
+"Language-Team: French (France)\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.2; wp-6.8.1\n"
+"X-Domain: complete-updates-manager"
+
+#. %s: Name of the plugin
+#: includes/class-admin-interface.php:66
+#, php-format
+msgid "\"%s\" plugin is active - updates are disabled"
+msgstr "Le plugin « %s » est actif ; les mises à jour sont désactivées"
+
+#. Description of the plugin
+msgid ""
+"Advanced tool to fully disable WordPress theme, plugin and core update "
+"checking, related cronjobs and notifications."
+msgstr ""
+"Outil avancé pour désactiver complètement la vérification des mises à jour "
+"du thème, du plugin et du noyau WordPress, les tâches cron et les "
+"notifications associées."
+
+#: includes/class-settings.php:154
+msgid "Check Frequency"
+msgstr "Vérifier la fréquence"
+
+#. %1$s: minimum PHP version required, %2$s: current PHP version
+#: complete-updates-manager.php:46
+#, php-format
+msgid ""
+"Complete Updates Manager requires PHP version %1$s or later. You are running "
+"version %2$s. Please upgrade PHP or disable the plugin."
+msgstr ""
+"Complete Updates Manager nécessite la version PHP %1$s ou ultérieure. Vous "
+"utilisez la version %2$s. Veuillez mettre à jour PHP ou désactiver le plugin."
+
+#. %1$s: minimum PHP version required, %2$s: current PHP version
+#: complete-updates-manager.php:64
+#, php-format
+msgid ""
+"Complete Updates Manager requires WordPress version %1$s or later. You are "
+"running version %2$s. Please upgrade WordPress or disable the plugin."
+msgstr ""
+"Le gestionnaire de mises à jour complet nécessite WordPress version %1$s ou "
+"ultérieure. Vous utilisez la version %2$s. Veuillez mettre à jour WordPress "
+"ou désactiver l'extension."
+
+#: includes/class-settings.php:209
+msgid "Configure security monitoring options while updates are disabled."
+msgstr ""
+"Configurez les options de surveillance de sécurité lorsque les mises à jour "
+"sont désactivées."
+
+#: includes/class-settings.php:199
+msgid "Configure which WordPress update functionality should be disabled."
+msgstr ""
+"Configurez la fonctionnalité de mise à jour de WordPress qui doit être "
+"désactivée."
+
+#: includes/class-settings.php:428
+msgid "Consider temporarily enabling updates to apply these security fixes."
+msgstr ""
+"Envisagez d’activer temporairement les mises à jour pour appliquer ces "
+"correctifs de sécurité."
+
+#: includes/class-settings.php:162
+msgid "Daily"
+msgstr "Tous les jours"
+
+#: includes/class-settings.php:110
+msgid "Disable plugin updates"
+msgstr "Désactiver les mises à jour des plugins"
+
+#: includes/class-settings.php:124
+msgid "Disable theme updates"
+msgstr "Désactiver les mises à jour du thème"
+
+#: includes/class-settings.php:96
+msgid "Disable WordPress core updates"
+msgstr "Désactiver les mises à jour du cœur de WordPress"
+
+#: includes/class-settings.php:278
+msgid ""
+"Disabling updates may expose your site to security vulnerabilities. Use this "
+"plugin with caution and check for important security updates regularly."
+msgstr ""
+"La désactivation des mises à jour peut exposer votre site à des failles de "
+"sécurité. Utilisez ce plugin avec prudence et vérifiez régulièrement les "
+"mises à jour de sécurité importantes."
+
+#: includes/class-admin-interface.php:111
+msgid "Documentation"
+msgstr "Documentation"
+
+#: includes/class-settings.php:420
+msgid ""
+"Even though updates are disabled, the following security issues were "
+"detected:"
+msgstr ""
+"Même si les mises à jour sont désactivées, les problèmes de sécurité "
+"suivants ont été détectés :"
+
+#: includes/class-settings.php:147
+msgid ""
+"Even with updates disabled, check for and notify about critical security "
+"updates"
+msgstr ""
+"Même avec les mises à jour désactivées, vérifiez et notifiez les mises à "
+"jour de sécurité critiques"
+
+#: includes/class-settings.php:160
+msgid "How often to check for security updates"
+msgstr "À quelle fréquence vérifier les mises à jour de sécurité"
+
+#. URI of the plugin
+msgid "https://globus.studio"
+msgstr "https://globus.studio"
+
+#. Author URI of the plugin
+msgid "https://leonidov.dev"
+msgstr "https://leonidov.dev"
+
+#: includes/class-settings.php:277
+msgid "Important Security Notice"
+msgstr "Avis de sécurité important"
+
+#: includes/class-settings.php:419
+msgid "Important WordPress Security Updates"
+msgstr "Mises à jour de sécurité importantes pour WordPress"
+
+#: includes/class-settings.php:146
+msgid "Monitor for security updates"
+msgstr "Surveiller les mises à jour de sécurité"
+
+#: includes/class-settings.php:104
+msgid "Plugin Updates"
+msgstr "Mises à jour des plugins"
+
+#: includes/class-settings.php:97
+msgid "Prevents WordPress from checking for core updates"
+msgstr "Empêche WordPress de vérifier les mises à jour principales"
+
+#: includes/class-settings.php:111
+msgid "Prevents WordPress from checking for plugin updates"
+msgstr "Empêche WordPress de vérifier les mises à jour des plugins"
+
+#: includes/class-settings.php:125
+msgid "Prevents WordPress from checking for theme updates"
+msgstr "Empêche WordPress de vérifier les mises à jour du thème"
+
+#: includes/class-settings.php:273
+msgid "Save Settings"
+msgstr "Enregistrer les paramètres"
+
+#: includes/class-settings.php:132
+msgid "Security Monitoring"
+msgstr "Surveillance de la sécurité"
+
+#. %s: Plugin name
+#: includes/class-settings.php:388
+#, php-format
+msgid "Security update available for plugin: %s"
+msgstr "Mise à jour de sécurité disponible pour le plugin : %s"
+
+#: includes/class-settings.php:140
+msgid "Security Update Monitoring"
+msgstr "Surveillance des mises à jour de sécurité"
+
+#: includes/class-admin-interface.php:103
+msgid "Settings"
+msgstr "Paramètres"
+
+#: includes/class-settings.php:118
+msgid "Theme Updates"
+msgstr "Mises à jour du thème"
+
+#: includes/class-settings.php:82
+msgid "Update Control Settings"
+msgstr "Paramètres de contrôle de mise à jour"
+
+#: includes/class-admin-interface.php:60
+msgid "Updates Disabled"
+msgstr "Mises à jour désactivées"
+
+#: includes/class-admin-interface.php:107
+msgid "Updates disabled"
+msgstr "Mises à jour désactivées"
+
+#: includes/class-settings.php:59
+msgid "Updates Manager"
+msgstr "Gestionnaire de mises à jour"
+
+#: includes/class-settings.php:58
+msgid "Updates Manager Settings"
+msgstr "Paramètres du gestionnaire de mises à jour"
+
+#: includes/class-settings.php:163
+msgid "Weekly"
+msgstr "Hebdomadaire"
+
+#: includes/class-settings.php:90
+msgid "WordPress Core Updates"
+msgstr "Mises à jour du noyau WordPress"
+
+#. Name of the plugin
+msgid "WP Update Manager"
+msgstr "Gestionnaire de mises à jour WP"
+
+#. Author of the plugin
+msgid "Yevhen Leonidov"
+msgstr "Yevhen Leonidov"
+
+#. %s: WordPress version
+#: includes/class-settings.php:365
+#, php-format
+msgid "Your WordPress version (%s) has known security issues."
+msgstr ""
+"Votre version de WordPress (%s) présente des problèmes de sécurité connus."
