@@ -45,8 +45,6 @@ class Complete_Updates_Manager {
         add_filter('pre_transient_update_plugins', [$this, 'override_version_check']);
 
         add_filter('pre_transient_update_core', [$this, 'override_version_check']);
-        add_filter('pre_site_transient_update_core', [$this, 'override_version_check']);
-        
 
         // Filter cron events and block HTTP requests to update API
         add_action('schedule_event', [$this, 'filter_cron_events']);
@@ -444,7 +442,6 @@ class Complete_Updates_Manager {
         
         // Additionally: hide notifications about available core updates
         add_filter('pre_option_update_core', '__return_null');
-        add_filter('pre_site_transient_update_core', '__return_null');
     }
     
     /**
