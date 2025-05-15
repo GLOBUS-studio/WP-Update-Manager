@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Complete Update Manager
+Plugin Name: Complete Updates Manager
 Description: Advanced tool to fully disable WordPress theme, plugin and core update checking, related cronjobs and notifications.
 Plugin URI:  https://globus.studio
 Version:     1.0.1
