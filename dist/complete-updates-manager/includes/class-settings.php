@@ -307,12 +307,14 @@ class Complete_Updates_Manager_Settings {
                         ?>
                     </td>
                 </tr>
-                <?php foreach ($plugins as $file => $data): ?>
+                <?php foreach ($plugins as $file => $data): 
+                    $safe_slug = sanitize_html_class($file);
+                ?>
                 <tr>
                     <td><?php echo esc_html($data['Name']); ?></td>
                     <td><?php echo esc_html($data['Version']); ?></td>
                     <td style="text-align:center;">
-                        <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($data['Version']); ?>" data-target="#wum_freeze_<?php echo esc_attr($file); ?>" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
+                        <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($data['Version']); ?>" data-target="#wum_freeze_<?php echo esc_attr($safe_slug); ?>" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
                     </td>
                     <td>
                         <?php
@@ -331,12 +333,14 @@ class Complete_Updates_Manager_Settings {
                     </td>
                 </tr>
                 <?php endforeach; ?>
-                <?php foreach ($themes as $slug => $theme): ?>
+                <?php foreach ($themes as $slug => $theme): 
+                    $safe_slug = sanitize_html_class($slug);
+                ?>
                 <tr>
                     <td><?php echo esc_html($theme->get('Name')); ?></td>
                     <td><?php echo esc_html($theme->get('Version')); ?></td>
                     <td style="text-align:center;">
-                        <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($theme->get('Version')); ?>" data-target="#wum_freeze_<?php echo esc_attr($slug); ?>" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
+                        <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($theme->get('Version')); ?>" data-target="#wum_freeze_<?php echo esc_attr($safe_slug); ?>" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
                     </td>
                     <td>
                         <?php

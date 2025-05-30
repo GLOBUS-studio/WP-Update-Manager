@@ -98,11 +98,10 @@ class Complete_Updates_Manager_Admin {
                 $(document).on('click', '.wum-copy-version', function(){
                     var version = $(this).data('version');
                     var target = $(this).data('target');
-                    if(version && target) {
-                        var $input = $(target);
-                        if ($input.length) {
-                            $input.val(version).trigger('change');
-                        }
+                    // Always use jQuery to select by id (target is always safe now)
+                    var $input = $(target);
+                    if(version && $input.length) {
+                        $input.val(version).trigger('change');
                     }
                 });
                 $(document).on('input', 'input[id^="wum_freeze_"]', function(){
@@ -152,7 +151,9 @@ class Complete_Updates_Manager_Admin {
      * @return void
      */
     public function render_freeze_version_field($plugin_slug, $current_version, $frozen_version, $show_button_and_indicator = true) {
-        $field_id = 'wum_freeze_' . esc_attr($plugin_slug);
+        // Sanitize slug for HTML id attribute
+        $safe_slug = sanitize_html_class($plugin_slug);
+        $field_id = 'wum_freeze_' . $safe_slug;
         $has_frozen = !empty($frozen_version);
         ?>
         <div class="wum-freeze-version-row" style="margin-bottom:8px;">
