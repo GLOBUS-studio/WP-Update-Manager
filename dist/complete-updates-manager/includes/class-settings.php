@@ -295,11 +295,11 @@ class Complete_Updates_Manager_Settings {
                         $frozen_core = isset($frozen['core']) ? $frozen['core'] : '';
                         $admin->render_freeze_version_field('core', '', $core_version, $frozen_core, false);
                         ?>
-                    </td>
-                    <td>
+                    </td>                    <td>
                         <?php
                         if (!empty($frozen_core)) {
                             echo '<span style="color:#dc3232;font-weight:bold;">' . esc_html__('Freeze is active', 'complete-updates-manager') . '</span>';
+                            echo ' <a href="#" class="wum-unfreeze-version" data-target="#wum_freeze_core" style="color:#dc3232;text-decoration:none;" title="' . esc_attr__('Cancel freeze', 'complete-updates-manager') . '">(' . esc_html__('cancel', 'complete-updates-manager') . ')</a>';
                         } else {
                             echo '<span style="color:#999;">' . esc_html__('Not frozen', 'complete-updates-manager') . '</span>';
                         }
@@ -319,11 +319,11 @@ class Complete_Updates_Manager_Settings {
                         $frozen_plugin = isset($frozen['plugin'][$file]) ? $frozen['plugin'][$file] : '';
                         $admin->render_freeze_version_field('plugin', $file, $data['Version'], $frozen_plugin, false);
                         ?>
-                    </td>
-                    <td>
+                    </td>                    <td>
                         <?php
                         if (!empty($frozen_plugin)) {
                             echo '<span style="color:#dc3232;font-weight:bold;">' . esc_html__('Freeze is active', 'complete-updates-manager') . '</span>';
+                            echo ' <a href="#" class="wum-unfreeze-version" data-target="#wum_freeze_' . esc_attr($safe_slug) . '" style="color:#dc3232;text-decoration:none;" title="' . esc_attr__('Cancel freeze', 'complete-updates-manager') . '">(' . esc_html__('cancel', 'complete-updates-manager') . ')</a>';
                         } else {
                             echo '<span style="color:#999;">' . esc_html__('Not frozen', 'complete-updates-manager') . '</span>';
                         }
@@ -344,11 +344,11 @@ class Complete_Updates_Manager_Settings {
                         $frozen_theme = isset($frozen['theme'][$slug]) ? $frozen['theme'][$slug] : '';
                         $admin->render_freeze_version_field('theme', $slug, $theme->get('Version'), $frozen_theme, false);
                         ?>
-                    </td>
-                    <td>
+                    </td>                    <td>
                         <?php
                         if (!empty($frozen_theme)) {
                             echo '<span style="color:#dc3232;font-weight:bold;">' . esc_html__('Freeze is active', 'complete-updates-manager') . '</span>';
+                            echo ' <a href="#" class="wum-unfreeze-version" data-target="#wum_freeze_' . esc_attr($safe_slug) . '" style="color:#dc3232;text-decoration:none;" title="' . esc_attr__('Cancel freeze', 'complete-updates-manager') . '">(' . esc_html__('cancel', 'complete-updates-manager') . ')</a>';
                         } else {
                             echo '<span style="color:#999;">' . esc_html__('Not frozen', 'complete-updates-manager') . '</span>';
                         }

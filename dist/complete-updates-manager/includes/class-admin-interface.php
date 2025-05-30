@@ -92,8 +92,7 @@ class Complete_Updates_Manager_Admin {
 
         // Add JS for freeze version field validation and copy
         add_action('admin_footer', function() {
-            ?>
-            <script>
+            ?>            <script>
             (function($){
                 $(document).on('click', '.wum-copy-version', function(){
                     var version = $(this).data('version');
@@ -102,6 +101,14 @@ class Complete_Updates_Manager_Admin {
                     var $input = $(target);
                     if(version && $input.length) {
                         $input.val(version).trigger('change');
+                    }
+                });
+                $(document).on('click', '.wum-unfreeze-version', function(e){
+                    e.preventDefault();
+                    var target = $(this).data('target');
+                    var $input = $(target);
+                    if($input.length) {
+                        $input.val('').trigger('change');
                     }
                 });
                 $(document).on('input', 'input[id^="wum_freeze_"]', function(){
