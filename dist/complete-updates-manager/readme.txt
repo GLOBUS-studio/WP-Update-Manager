@@ -24,6 +24,7 @@ The Complete Update Manager plugin provides a robust solution to disable the Wor
 * Includes admin bar notification showing that updates are disabled
 * Configurable settings page to customize which updates to disable
 * Security monitoring option for critical updates even when updates are disabled
+* Version Freeze: Freeze WordPress core, plugin, or theme at a specific version. Updates above this version are blocked, even manual ones. Manage freeze settings in a dedicated tab on the plugin settings page
 
 **Important Security Notice:**
 

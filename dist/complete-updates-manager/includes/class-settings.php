@@ -253,26 +253,136 @@ class Complete_Updates_Manager_Settings {
     }
 
     /**
-     * Render the settings page
+     * Render the Version Freeze tab
      *
-     * @since  1.0.1
+     * @since 1.1.0
+     * @return void
+     */
+    public function render_version_freeze_tab() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        $frozen = get_option('wum_version_freeze', []);
+        $plugins = get_plugins();
+        $themes = wp_get_themes();
+        $core_version = get_bloginfo('version');
+        ?>
+        <h2><?php esc_html_e('Version Freeze', 'complete-updates-manager'); ?></h2>
+        <form method="post">
+            <?php wp_nonce_field('wum_version_freeze_action', 'wum_version_freeze_nonce'); ?>
+            <table class="widefat fixed" style="max-width:700px;">
+                <thead><tr><th><?php esc_html_e('Component', 'complete-updates-manager'); ?></th><th><?php esc_html_e('Current Version', 'complete-updates-manager'); ?></th><th><?php esc_html_e('Freeze at Version', 'complete-updates-manager'); ?></th></tr></thead>
+                <tbody>
+                <tr>
+                    <td><strong><?php esc_html_e('WordPress Core', 'complete-updates-manager'); ?></strong></td>
+                    <td><?php echo esc_html($core_version); ?></td>
+                    <td><input type="text" name="wum_version_freeze[core]" value="<?php echo esc_attr(isset($frozen['core']) ? $frozen['core'] : ''); ?>" placeholder="<?php echo esc_attr($core_version); ?>" style="width:100px;" /></td>
+                </tr>
+                <?php foreach ($plugins as $file => $data): ?>
+                <tr>
+                    <td><?php echo esc_html($data['Name']); ?></td>
+                    <td><?php echo esc_html($data['Version']); ?></td>
+                    <td><input type="text" name="wum_version_freeze[plugin][<?php echo esc_attr($file); ?>]" value="<?php echo esc_attr(isset($frozen['plugin'][$file]) ? $frozen['plugin'][$file] : ''); ?>" placeholder="<?php echo esc_attr($data['Version']); ?>" style="width:100px;" /></td>
+                </tr>
+                <?php endforeach; ?>
+                <?php foreach ($themes as $slug => $theme): ?>
+                <tr>
+                    <td><?php echo esc_html($theme->get('Name')); ?></td>
+                    <td><?php echo esc_html($theme->get('Version')); ?></td>
+                    <td><input type="text" name="wum_version_freeze[theme][<?php echo esc_attr($slug); ?>]" value="<?php echo esc_attr(isset($frozen['theme'][$slug]) ? $frozen['theme'][$slug] : ''); ?>" placeholder="<?php echo esc_attr($theme->get('Version')); ?>" style="width:100px;" /></td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+            <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Save Freeze Settings', 'complete-updates-manager'); ?>" /></p>
+        </form>
+        <p class="description"><?php esc_html_e('Specify a version to freeze. Updates above this version will be blocked, even manually.', 'complete-updates-manager'); ?></p>
+        <?php
+    }
+
+    /**
+     * Handle saving version freeze settings
+     *
+     * @since 1.1.0
+     * @return void
+     */
+    public function maybe_save_version_freeze() {
+        if (!current_user_can('manage_options')) return;
+        if (isset($_POST['wum_version_freeze_nonce']) && wp_verify_nonce($_POST['wum_version_freeze_nonce'], 'wum_version_freeze_action')) {
+            $freeze = isset($_POST['wum_version_freeze']) ? $_POST['wum_version_freeze'] : [];
+            $clean = [];
+            if (!empty($freeze['core'])) {
+                $clean['core'] = sanitize_text_field($freeze['core']);
+            }
+            if (!empty($freeze['plugin']) && is_array($freeze['plugin'])) {
+                foreach ($freeze['plugin'] as $file => $ver) {
+                    if (!empty($ver)) $clean['plugin'][$file] = sanitize_text_field($ver);
+                }
+            }
+            if (!empty($freeze['theme']) && is_array($freeze['theme'])) {
+                foreach ($freeze['theme'] as $slug => $ver) {
+                    if (!empty($ver)) $clean['theme'][$slug] = sanitize_text_field($ver);
+                }
+            }
+            update_option('wum_version_freeze', $clean);
+        }
+    }
+
+    /**
+     * Add Version Freeze tab to settings page navigation
+     *
+     * @since 1.1.0
+     * @return void
+     */
+    public function render_settings_tabs($active = '') {
+        $tabs = [
+            'general' => __('General', 'complete-updates-manager'),
+            'security' => __('Security Monitoring', 'complete-updates-manager'),
+            'freeze'   => __('Version Freeze', 'complete-updates-manager'),
+        ];
+        echo '<h2 class="nav-tab-wrapper">';
+        foreach ($tabs as $tab => $label) {
+            $class = ($active === $tab) ? ' nav-tab-active' : '';
+            $url = admin_url('options-general.php?page=complete-updates-manager&tab=' . $tab);
+            echo '<a href="' . esc_url($url) . '" class="nav-tab' . esc_attr($class) . '">' . esc_html($label) . '</a>';
+        }
+        echo '</h2>';
+    }
+
+    /**
+     * Render the settings page with tabs
+     *
+     * @since 1.1.0
      * @return void
      */
     public function render_settings_page() {
         if (!current_user_can('manage_options')) {
             return;
         }
+        $tab = isset($_GET['tab']) ? sanitize_key($_GET['tab']) : 'general';
+        $this->maybe_save_version_freeze();
         ?>
         <div class="wrap">
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
-            <form action="options.php" method="post">
-                <?php
-                settings_fields('wum_settings_group');
-                do_settings_sections('complete-updates-manager');
-                wp_nonce_field('wum_settings_action', 'wum_settings_nonce');
-                submit_button(__('Save Settings', 'complete-updates-manager'));
-                ?>
-            </form>
+            <?php $this->render_settings_tabs($tab); ?>
+            <?php if ($tab === 'general') : ?>
+                <form action="options.php" method="post">
+                    <?php
+                    settings_fields('wum_settings_group');
+                    do_settings_sections('complete-updates-manager');
+                    wp_nonce_field('wum_settings_action', 'wum_settings_nonce');
+                    submit_button(__('Save Settings', 'complete-updates-manager'));
+                    ?>
+                </form>
+            <?php elseif ($tab === 'security') : ?>
+                <div style="margin-top:20px;">
+                    <?php $this->render_security_section(); ?>
+                </div>
+            <?php elseif ($tab === 'freeze') : ?>
+                <div style="margin-top:20px;">
+                    <?php $this->render_version_freeze_tab(); ?>
+                </div>
+            <?php endif; ?>
             <div class="wum-info-box" style="margin-top: 20px; padding: 15px; background: #f8f8f8; border-left: 4px solid #dc3232;">
                 <h3><?php esc_html_e('Important Security Notice', 'complete-updates-manager'); ?></h3>
                 <p><?php esc_html_e('Disabling updates may expose your site to security vulnerabilities. Use this plugin with caution and check for important security updates regularly.', 'complete-updates-manager'); ?></p>

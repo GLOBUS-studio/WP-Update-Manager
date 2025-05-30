@@ -225,7 +225,6 @@ class Complete_Updates_Manager {
      * @return object            Modified transient value
      */
     public function override_version_check($transient) {
-        // Get current filter
         $current_filter = current_filter();
         
         // Skip if monitoring security updates and this is a core update check
@@ -255,6 +254,36 @@ class Complete_Updates_Manager {
         $current->updates = []; // Empty updates array
         $current->version_checked = $wp_version;
         $current->last_checked = time();
+        
+        // Version freeze logic for core
+        if (strpos($current_filter, 'update_core') !== false && !empty($transient->updates)) {
+            $frozen = function_exists('wum_get_frozen_version') ? wum_get_frozen_version('core') : null;
+            if ($frozen) {
+                foreach ($transient->updates as $k => $update) {
+                    if (isset($update->current) && version_compare($update->current, $frozen, '>')) {
+                        unset($transient->updates[$k]);
+                    }
+                }
+            }
+        }
+        // Version freeze logic for plugins
+        if (strpos($current_filter, 'update_plugins') !== false && !empty($transient->response)) {
+            foreach ($transient->response as $plugin_file => $update) {
+                $frozen = function_exists('wum_get_frozen_version') ? wum_get_frozen_version('plugin', $plugin_file) : null;
+                if ($frozen && isset($update->new_version) && version_compare($update->new_version, $frozen, '>')) {
+                    unset($transient->response[$plugin_file]);
+                }
+            }
+        }
+        // Version freeze logic for themes
+        if (strpos($current_filter, 'update_themes') !== false && !empty($transient->response)) {
+            foreach ($transient->response as $theme_slug => $update) {
+                $frozen = function_exists('wum_get_frozen_version') ? wum_get_frozen_version('theme', $theme_slug) : null;
+                if ($frozen && isset($update->new_version) && version_compare($update->new_version, $frozen, '>')) {
+                    unset($transient->response[$theme_slug]);
+                }
+            }
+        }
         
         // Return modified object
         return $current;

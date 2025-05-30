@@ -153,6 +153,43 @@ function wum_plugin_deactivation() {
     wp_schedule_single_event(time() + 10, 'wp_update_themes');
 }
 
+/**
+ * Get frozen version for a component
+ *
+ * @param string $type core|plugin|theme
+ * @param string $slug plugin file or theme slug (optional)
+ * @return string|null
+ */
+function wum_get_frozen_version($type, $slug = '') {
+    $frozen = get_option('wum_version_freeze', []);
+    if ($type === 'core') {
+        return isset($frozen['core']) ? $frozen['core'] : null;
+    }
+    if ($type === 'plugin' && $slug && isset($frozen['plugin'][$slug])) {
+        return $frozen['plugin'][$slug];
+    }
+    if ($type === 'theme' && $slug && isset($frozen['theme'][$slug])) {
+        return $frozen['theme'][$slug];
+    }
+    return null;
+}
+
+/**
+ * Check if update is allowed for a component
+ *
+ * @param string $type core|plugin|theme
+ * @param string $slug plugin file or theme slug (optional)
+ * @param string $new_version
+ * @return bool
+ */
+function wum_is_update_allowed($type, $slug, $new_version) {
+    $frozen = wum_get_frozen_version($type, $slug);
+    if ($frozen && version_compare($new_version, $frozen, '>')) {
+        return false;
+    }
+    return true;
+}
+
 function wum_validate_args($args) {
     if (!is_array($args)) {
         return false;
