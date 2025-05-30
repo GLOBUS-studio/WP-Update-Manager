@@ -155,6 +155,7 @@ class Complete_Updates_Manager_Admin {
         $safe_slug = $type === 'core' ? 'core' : sanitize_html_class($slug);
         $field_id = 'wum_freeze_' . $safe_slug;
         $has_frozen = !empty($frozen_version);
+        
         // Build correct name attribute
         if ($type === 'core') {
             $name = 'wum_version_freeze[core]';

@@ -290,11 +290,10 @@ class Complete_Updates_Manager_Settings {
                     <td><?php echo esc_html($core_version); ?></td>
                     <td style="text-align:center;">
                         <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($core_version); ?>" data-target="#wum_freeze_core" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
-                    </td>
-                    <td>
+                    </td>                    <td>
                         <?php
                         $frozen_core = isset($frozen['core']) ? $frozen['core'] : '';
-                        $admin->render_freeze_version_field('core', $core_version, $frozen_core, false);
+                        $admin->render_freeze_version_field('core', '', $core_version, $frozen_core, false);
                         ?>
                     </td>
                     <td>
@@ -315,11 +314,10 @@ class Complete_Updates_Manager_Settings {
                     <td><?php echo esc_html($data['Version']); ?></td>
                     <td style="text-align:center;">
                         <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($data['Version']); ?>" data-target="#wum_freeze_<?php echo esc_attr($safe_slug); ?>" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
-                    </td>
-                    <td>
+                    </td>                    <td>
                         <?php
                         $frozen_plugin = isset($frozen['plugin'][$file]) ? $frozen['plugin'][$file] : '';
-                        $admin->render_freeze_version_field($file, $data['Version'], $frozen_plugin, false);
+                        $admin->render_freeze_version_field('plugin', $file, $data['Version'], $frozen_plugin, false);
                         ?>
                     </td>
                     <td>
@@ -341,11 +339,10 @@ class Complete_Updates_Manager_Settings {
                     <td><?php echo esc_html($theme->get('Version')); ?></td>
                     <td style="text-align:center;">
                         <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($theme->get('Version')); ?>" data-target="#wum_freeze_<?php echo esc_attr($safe_slug); ?>" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
-                    </td>
-                    <td>
+                    </td>                    <td>
                         <?php
                         $frozen_theme = isset($frozen['theme'][$slug]) ? $frozen['theme'][$slug] : '';
-                        $admin->render_freeze_version_field($slug, $theme->get('Version'), $frozen_theme, false);
+                        $admin->render_freeze_version_field('theme', $slug, $theme->get('Version'), $frozen_theme, false);
                         ?>
                     </td>
                     <td>
