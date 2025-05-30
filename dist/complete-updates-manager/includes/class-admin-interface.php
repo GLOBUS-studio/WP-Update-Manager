@@ -89,6 +89,29 @@ class Complete_Updates_Manager_Admin {
                 font-weight: bold;
             }'
         );
+
+        // Add JS for freeze version field validation and copy
+        add_action('admin_footer', function() {
+            ?>
+            <script>
+            (function($){
+                $(document).on('click', '.wum-copy-version', function(){
+                    var version = $(this).data('version');
+                    var target = $(this).data('target');
+                    if(version && target) {
+                        $(target).val(version).trigger('change');
+                    }
+                });
+                $(document).on('input', 'input[id^="wum_freeze_"]', function(){
+                    var val = $(this).val();
+                    if(!/^([0-9]+\.?)+$/.test(val) && val !== '') {
+                        $(this).val(val.replace(/[^0-9.]/g, ''));
+                    }
+                });
+            })(jQuery);
+            </script>
+            <?php
+        });
     }
     
     /**
@@ -114,5 +137,32 @@ class Complete_Updates_Manager_Admin {
         array_unshift($links, $status_link, $settings_link, $docs_link);
         
         return $links;
+    }
+
+    /**
+     * Render freeze version field with copy button and indicator
+     *
+     * @param string $plugin_slug Plugin slug
+     * @param string $current_version Current plugin version
+     * @param string $frozen_version Frozen version value
+     * @return void
+     */
+    public function render_freeze_version_field($plugin_slug, $current_version, $frozen_version) {
+        $field_id = 'wum_freeze_' . esc_attr($plugin_slug);
+        $has_frozen = !empty($frozen_version);
+        ?>
+        <div class="wum-freeze-version-row" style="margin-bottom:8px;">
+            <label for="<?php echo $field_id; ?>">
+                <?php esc_html_e('Freeze version', 'complete-updates-manager'); ?>
+            </label>
+            <input type="text" id="<?php echo $field_id; ?>" name="wum_freeze_versions[<?php echo esc_attr($plugin_slug); ?>]" value="<?php echo esc_attr($frozen_version); ?>" pattern="^[0-9.]+$" style="width:100px;" />
+            <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($current_version); ?>" data-target="#<?php echo $field_id; ?>">
+                <?php esc_html_e('Copy current', 'complete-updates-manager'); ?>
+            </button>
+            <?php if ($has_frozen): ?>
+                <span class="wum-frozen-indicator" title="<?php esc_attr_e('Frozen version is set', 'complete-updates-manager'); ?>" style="color:#dc3232;font-weight:bold;">&#9679;</span>
+            <?php endif; ?>
+        </div>
+        <?php
     }
 }
