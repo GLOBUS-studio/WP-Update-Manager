@@ -102,13 +102,17 @@ class Complete_Updates_Manager_Admin {
                     if(version && $input.length) {
                         $input.val(version).trigger('change');
                     }
-                });
-                $(document).on('click', '.wum-unfreeze-version', function(e){
+                });                $(document).on('click', '.wum-unfreeze-version', function(e){
                     e.preventDefault();
                     var target = $(this).data('target');
                     var $input = $(target);
                     if($input.length) {
                         $input.val('').trigger('change');
+                        // Auto-save form after clearing the field
+                        var $form = $input.closest('form');
+                        if($form.length) {
+                            $form.submit();
+                        }
                     }
                 });
                 $(document).on('input', 'input[id^="wum_freeze_"]', function(){
