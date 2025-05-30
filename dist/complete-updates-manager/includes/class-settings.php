@@ -276,20 +276,35 @@ class Complete_Updates_Manager_Settings {
                 <tr>
                     <td><strong><?php esc_html_e('WordPress Core', 'complete-updates-manager'); ?></strong></td>
                     <td><?php echo esc_html($core_version); ?></td>
-                    <td><input type="text" name="wum_version_freeze[core]" value="<?php echo esc_attr(isset($frozen['core']) ? $frozen['core'] : ''); ?>" placeholder="<?php echo esc_attr($core_version); ?>" style="width:100px;" /></td>
+                    <td><?php
+                        if (method_exists($this, 'render_freeze_version_field')) {
+                            $frozen_core = isset($frozen['core']) ? $frozen['core'] : '';
+                            $this->render_freeze_version_field('core', $core_version, $frozen_core);
+                        }
+                    ?></td>
                 </tr>
                 <?php foreach ($plugins as $file => $data): ?>
                 <tr>
                     <td><?php echo esc_html($data['Name']); ?></td>
                     <td><?php echo esc_html($data['Version']); ?></td>
-                    <td><input type="text" name="wum_version_freeze[plugin][<?php echo esc_attr($file); ?>]" value="<?php echo esc_attr(isset($frozen['plugin'][$file]) ? $frozen['plugin'][$file] : ''); ?>" placeholder="<?php echo esc_attr($data['Version']); ?>" style="width:100px;" /></td>
+                    <td><?php
+                        if (method_exists($this, 'render_freeze_version_field')) {
+                            $frozen_plugin = isset($frozen['plugin'][$file]) ? $frozen['plugin'][$file] : '';
+                            $this->render_freeze_version_field($file, $data['Version'], $frozen_plugin);
+                        }
+                    ?></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php foreach ($themes as $slug => $theme): ?>
                 <tr>
                     <td><?php echo esc_html($theme->get('Name')); ?></td>
                     <td><?php echo esc_html($theme->get('Version')); ?></td>
-                    <td><input type="text" name="wum_version_freeze[theme][<?php echo esc_attr($slug); ?>]" value="<?php echo esc_attr(isset($frozen['theme'][$slug]) ? $frozen['theme'][$slug] : ''); ?>" placeholder="<?php echo esc_attr($theme->get('Version')); ?>" style="width:100px;" /></td>
+                    <td><?php
+                        if (method_exists($this, 'render_freeze_version_field')) {
+                            $frozen_theme = isset($frozen['theme'][$slug]) ? $frozen['theme'][$slug] : '';
+                            $this->render_freeze_version_field($slug, $theme->get('Version'), $frozen_theme);
+                        }
+                    ?></td>
                 </tr>
                 <?php endforeach; ?>
                 </tbody>
