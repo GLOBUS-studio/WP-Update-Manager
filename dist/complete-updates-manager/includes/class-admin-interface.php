@@ -144,23 +144,33 @@ class Complete_Updates_Manager_Admin {
     /**
      * Render freeze version field with copy button and indicator
      *
-     * @param string $plugin_slug Plugin slug
-     * @param string $current_version Current plugin version
+     * @param string $type core|plugin|theme
+     * @param string $slug Plugin file or theme slug ('' for core)
+     * @param string $current_version Current version
      * @param string $frozen_version Frozen version value
      * @param bool $show_button_and_indicator Show button and indicator (default true)
      * @return void
      */
-    public function render_freeze_version_field($plugin_slug, $current_version, $frozen_version, $show_button_and_indicator = true) {
-        // Sanitize slug for HTML id attribute
-        $safe_slug = sanitize_html_class($plugin_slug);
+    public function render_freeze_version_field($type, $slug, $current_version, $frozen_version, $show_button_and_indicator = true) {
+        $safe_slug = $type === 'core' ? 'core' : sanitize_html_class($slug);
         $field_id = 'wum_freeze_' . $safe_slug;
         $has_frozen = !empty($frozen_version);
+        // Build correct name attribute
+        if ($type === 'core') {
+            $name = 'wum_version_freeze[core]';
+        } elseif ($type === 'plugin') {
+            $name = 'wum_version_freeze[plugin][' . esc_attr($slug) . ']';
+        } elseif ($type === 'theme') {
+            $name = 'wum_version_freeze[theme][' . esc_attr($slug) . ']';
+        } else {
+            $name = '';
+        }
         ?>
         <div class="wum-freeze-version-row" style="margin-bottom:8px;">
             <label for="<?php echo $field_id; ?>" class="screen-reader-text">
                 <?php esc_html_e('Freeze version', 'complete-updates-manager'); ?>
             </label>
-            <input type="text" id="<?php echo $field_id; ?>" name="wum_version_freeze[<?php echo esc_attr($plugin_slug); ?>]" value="<?php echo esc_attr($frozen_version); ?>" pattern="^[0-9.]+$" style="width:100px;" autocomplete="off" />
+            <input type="text" id="<?php echo $field_id; ?>" name="<?php echo $name; ?>" value="<?php echo esc_attr($frozen_version); ?>" pattern="^[0-9.]+$" style="width:100px;" autocomplete="off" />
             <?php if ($show_button_and_indicator): ?>
                 <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($current_version); ?>" data-target="#<?php echo $field_id; ?>" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
                 <?php if ($has_frozen): ?>
