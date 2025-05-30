@@ -266,7 +266,6 @@ class Complete_Updates_Manager_Settings {
         $plugins = get_plugins();
         $themes = wp_get_themes();
         $core_version = get_bloginfo('version');
-        // Get admin interface instance for field rendering
         if (!class_exists('Complete_Updates_Manager_Admin')) {
             require_once WUM_PLUGIN_DIR . 'includes/class-admin-interface.php';
         }
@@ -275,18 +274,35 @@ class Complete_Updates_Manager_Settings {
         <h2><?php esc_html_e('Version Freeze', 'complete-updates-manager'); ?></h2>
         <form method="post">
             <?php wp_nonce_field('wum_version_freeze_action', 'wum_version_freeze_nonce'); ?>
-            <table class="widefat fixed" style="max-width:700px;">
-                <thead><tr><th><?php esc_html_e('Component', 'complete-updates-manager'); ?></th><th><?php esc_html_e('Current Version', 'complete-updates-manager'); ?></th><th><?php esc_html_e('Freeze at Version', 'complete-updates-manager'); ?></th></tr></thead>
+            <table class="widefat fixed" style="max-width:900px;">
+                <thead>
+                <tr>
+                    <th><?php esc_html_e('Component', 'complete-updates-manager'); ?></th>
+                    <th><?php esc_html_e('Current Version', 'complete-updates-manager'); ?></th>
+                    <th></th>
+                    <th><?php esc_html_e('Freeze at Version', 'complete-updates-manager'); ?></th>
+                    <th><?php esc_html_e('Status', 'complete-updates-manager'); ?></th>
+                </tr>
+                </thead>
                 <tbody>
                 <tr>
                     <td><strong><?php esc_html_e('WordPress Core', 'complete-updates-manager'); ?></strong></td>
                     <td><?php echo esc_html($core_version); ?></td>
+                    <td style="text-align:center;">
+                        <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($core_version); ?>" data-target="#wum_freeze_core" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
+                    </td>
                     <td>
                         <?php
                         $frozen_core = isset($frozen['core']) ? $frozen['core'] : '';
-                        $admin->render_freeze_version_field('core', $core_version, $frozen_core);
+                        $admin->render_freeze_version_field('core', $core_version, $frozen_core, false);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
                         if (!empty($frozen_core)) {
-                            echo '<div style="color:#dc3232;font-size:12px;">' . esc_html__('Freeze is active for core', 'complete-updates-manager') . '</div>';
+                            echo '<span style="color:#dc3232;font-weight:bold;">' . esc_html__('Freeze is active', 'complete-updates-manager') . '</span>';
+                        } else {
+                            echo '<span style="color:#999;">' . esc_html__('Not frozen', 'complete-updates-manager') . '</span>';
                         }
                         ?>
                     </td>
@@ -295,12 +311,21 @@ class Complete_Updates_Manager_Settings {
                 <tr>
                     <td><?php echo esc_html($data['Name']); ?></td>
                     <td><?php echo esc_html($data['Version']); ?></td>
+                    <td style="text-align:center;">
+                        <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($data['Version']); ?>" data-target="#wum_freeze_<?php echo esc_attr($file); ?>" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
+                    </td>
                     <td>
                         <?php
                         $frozen_plugin = isset($frozen['plugin'][$file]) ? $frozen['plugin'][$file] : '';
-                        $admin->render_freeze_version_field($file, $data['Version'], $frozen_plugin);
+                        $admin->render_freeze_version_field($file, $data['Version'], $frozen_plugin, false);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
                         if (!empty($frozen_plugin)) {
-                            echo '<div style="color:#dc3232;font-size:12px;">' . esc_html__('Freeze is active for this plugin', 'complete-updates-manager') . '</div>';
+                            echo '<span style="color:#dc3232;font-weight:bold;">' . esc_html__('Freeze is active', 'complete-updates-manager') . '</span>';
+                        } else {
+                            echo '<span style="color:#999;">' . esc_html__('Not frozen', 'complete-updates-manager') . '</span>';
                         }
                         ?>
                     </td>
@@ -310,12 +335,21 @@ class Complete_Updates_Manager_Settings {
                 <tr>
                     <td><?php echo esc_html($theme->get('Name')); ?></td>
                     <td><?php echo esc_html($theme->get('Version')); ?></td>
+                    <td style="text-align:center;">
+                        <button type="button" class="button wum-copy-version" data-version="<?php echo esc_attr($theme->get('Version')); ?>" data-target="#wum_freeze_<?php echo esc_attr($slug); ?>" title="<?php esc_attr_e('Copy current version', 'complete-updates-manager'); ?>">&#8594;</button>
+                    </td>
                     <td>
                         <?php
                         $frozen_theme = isset($frozen['theme'][$slug]) ? $frozen['theme'][$slug] : '';
-                        $admin->render_freeze_version_field($slug, $theme->get('Version'), $frozen_theme);
+                        $admin->render_freeze_version_field($slug, $theme->get('Version'), $frozen_theme, false);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
                         if (!empty($frozen_theme)) {
-                            echo '<div style="color:#dc3232;font-size:12px;">' . esc_html__('Freeze is active for this theme', 'complete-updates-manager') . '</div>';
+                            echo '<span style="color:#dc3232;font-weight:bold;">' . esc_html__('Freeze is active', 'complete-updates-manager') . '</span>';
+                        } else {
+                            echo '<span style="color:#999;">' . esc_html__('Not frozen', 'complete-updates-manager') . '</span>';
                         }
                         ?>
                     </td>
