@@ -73,6 +73,9 @@ To temporarily check for updates, simply deactivate the plugin, check for update
 * Added security monitoring for critical updates
 * Improved admin interface with settings link
 * Added proper localization for all text strings
+* Added first activation warning notice with security recommendations
+* Enhanced security monitoring with detailed plugin and theme version checks
+* Improved security notices with more comprehensive update information
 
 = 1.0.0 =
 * Initial release

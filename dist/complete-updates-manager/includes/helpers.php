@@ -117,6 +117,9 @@ function wum_plugin_activation() {
     delete_site_transient('update_plugins');
     delete_site_transient('update_themes');
     
+    // Check if this is first activation
+    $is_first_activation = !get_option('wum_settings') && !get_option('wum_first_activation_done');
+    
     // Set default options if they don't exist
     if (!get_option('wum_settings')) {
         $default_settings = [
@@ -127,6 +130,12 @@ function wum_plugin_activation() {
             'security_check_interval' => 'daily',
         ];
         add_option('wum_settings', $default_settings);
+    }
+    
+    // Set first activation flag and notice
+    if ($is_first_activation) {
+        add_option('wum_first_activation_done', true);
+        add_option('wum_show_activation_notice', true);
     }
     
     delete_transient('wum_security_check');

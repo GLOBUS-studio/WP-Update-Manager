@@ -187,15 +187,17 @@ class Complete_Updates_Manager_Settings {
         }
         
         return $sanitized;
-    }
-
-    /**
+    }    /**
      * Render the general section description
      *
      * @since  1.0.1
      * @return void
      */
     public function render_general_section() {
+        echo '<div class="notice notice-warning inline" style="margin: 10px 0; padding: 10px;">';
+        echo '<p><strong>' . esc_html__('Security Warning:', 'complete-updates-manager') . '</strong> ';
+        echo esc_html__('Disabling updates may leave your site vulnerable to security threats. Use with caution and enable security monitoring below.', 'complete-updates-manager') . '</p>';
+        echo '</div>';
         echo '<p>' . esc_html__('Configure which WordPress update functionality should be disabled.', 'complete-updates-manager') . '</p>';
     }
 
@@ -492,9 +494,7 @@ class Complete_Updates_Manager_Settings {
             // Set transient to prevent frequent checks
             set_transient('wum_security_check', 1, $interval);
         }
-    }
-
-    /**
+    }    /**
      * Fetch security updates from WordPress API
      *
      * @since  1.0.1
@@ -542,32 +542,11 @@ class Complete_Updates_Manager_Settings {
             ];
         }
         
-        // Also check for plugin security updates if possible
-        if (function_exists('wp_get_update_data')) {
-            $update_data = wp_get_update_data();
-            if ($update_data['counts']['plugins'] > 0) {
-                // Try to get more detailed plugin update info
-                wp_update_plugins();
-                $plugin_updates = get_site_transient('update_plugins');
-                
-                if (!empty($plugin_updates->response)) {
-                    foreach ($plugin_updates->response as $plugin_file => $plugin_data) {
-                        // Look for plugins with security updates
-                        if (strpos($plugin_data->new_version, 'security') !== false || strpos($plugin_data->upgrade_notice, 'security') !== false) {
-                            $plugin_info = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin_file);
-                            $security_issues[] = [
-                                'type' => 'plugin',
-                                'message' => sprintf(
-                                    /* translators: %s: Plugin name */
-                                    __('Security update available for plugin: %s', 'complete-updates-manager'),
-                                    $plugin_info['Name']
-                                )
-                            ];
-                        }
-                    }
-                }
-            }
-        }
+        // Check for plugin security updates
+        $this->check_plugin_security_updates($security_issues);
+        
+        // Check for theme security updates  
+        $this->check_theme_security_updates($security_issues);
         
         if (!empty($security_issues)) {
             update_option('wum_security_issues', $security_issues);
@@ -577,6 +556,70 @@ class Complete_Updates_Manager_Settings {
     }
 
     /**
+     * Check plugin security updates
+     *
+     * @param array $security_issues Reference to security issues array
+     * @return void
+     */
+    private function check_plugin_security_updates(&$security_issues) {
+        // Temporarily allow plugin update checks
+        delete_site_transient('update_plugins');
+        wp_update_plugins();
+        
+        $plugin_updates = get_site_transient('update_plugins');
+        
+        if (!empty($plugin_updates->response)) {
+            foreach ($plugin_updates->response as $plugin_file => $plugin_data) {
+                if (!empty($plugin_data->new_version) && file_exists(WP_PLUGIN_DIR . '/' . $plugin_file)) {
+                    $plugin_info = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin_file, false, false);
+                    $security_issues[] = [
+                        'type' => 'plugin',
+                        'message' => sprintf(
+                            /* translators: 1: Plugin name, 2: Current version, 3: New version */
+                            __('Plugin "%1$s" has an update available (v%2$s → v%3$s). This may include security fixes.', 'complete-updates-manager'),
+                            $plugin_info['Name'],
+                            $plugin_info['Version'],
+                            $plugin_data->new_version
+                        )
+                    ];
+                }
+            }
+        }
+    }
+
+    /**
+     * Check theme security updates
+     *
+     * @param array $security_issues Reference to security issues array
+     * @return void
+     */
+    private function check_theme_security_updates(&$security_issues) {
+        // Temporarily allow theme update checks
+        delete_site_transient('update_themes');
+        wp_update_themes();
+        
+        $theme_updates = get_site_transient('update_themes');
+        
+        if (!empty($theme_updates->response)) {
+            foreach ($theme_updates->response as $theme_slug => $theme_data) {
+                if (!empty($theme_data['new_version'])) {
+                    $theme = wp_get_theme($theme_slug);
+                    if ($theme->exists()) {
+                        $security_issues[] = [
+                            'type' => 'theme',
+                            'message' => sprintf(
+                                /* translators: 1: Theme name, 2: Current version, 3: New version */
+                                __('Theme "%1$s" has an update available (v%2$s → v%3$s). This may include security fixes.', 'complete-updates-manager'),
+                                $theme->get('Name'),
+                                $theme->get('Version'),
+                                $theme_data['new_version']
+                            )
+                        ];
+                    }
+                }
+            }
+        }
+    }    /**
      * Display security update notices
      *
      * @since  1.0.1
@@ -595,7 +638,8 @@ class Complete_Updates_Manager_Settings {
         echo '<ul>';
         
         foreach ($security_issues as $issue) {
-            echo '<li>' . esc_html($issue['message']) . '</li>';
+            $message = is_array($issue) && isset($issue['message']) ? $issue['message'] : $issue;
+            echo '<li>' . esc_html($message) . '</li>';
         }
         
         echo '</ul>';

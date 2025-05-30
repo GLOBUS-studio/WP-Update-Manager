@@ -11,9 +11,7 @@ if (!defined('ABSPATH')) {
  *
  * @since 1.0.1
  */
-class Complete_Updates_Manager_Admin {
-
-    /**
+class Complete_Updates_Manager_Admin {    /**
      * Initialize the admin functionality
      *
      * @since  1.0.1
@@ -28,6 +26,9 @@ class Complete_Updates_Manager_Admin {
         
         // Add plugin action links
         add_filter('plugin_action_links_' . WUM_PLUGIN_BASENAME, [$this, 'add_plugin_action_links']);
+        
+        // Add first activation notice
+        add_action('admin_notices', [$this, 'show_first_activation_notice']);
     }
 
     /**
@@ -150,6 +151,57 @@ class Complete_Updates_Manager_Admin {
         array_unshift($links, $status_link, $settings_link, $docs_link);
         
         return $links;
+    }
+
+    /**
+     * Show first activation notice
+     *
+     * @return void
+     */
+    public function show_first_activation_notice() {
+        if (!get_option('wum_show_activation_notice')) {
+            return;
+        }
+
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+
+        // Check if user dismissed the notice
+        if (isset($_GET['wum_dismiss_notice']) && wp_verify_nonce($_GET['_wpnonce'], 'wum_dismiss_notice')) {
+            delete_option('wum_show_activation_notice');
+            return;
+        }
+
+        $dismiss_url = wp_nonce_url(
+            add_query_arg('wum_dismiss_notice', '1'),
+            'wum_dismiss_notice'
+        );
+        ?>
+        <div class="notice notice-warning is-dismissible">
+            <h3><?php esc_html_e('Complete Update Manager - Important Security Notice', 'complete-updates-manager'); ?></h3>
+            <p>
+                <strong><?php esc_html_e('All WordPress updates have been disabled!', 'complete-updates-manager'); ?></strong>
+                <?php esc_html_e('This includes core, plugin, and theme updates. Your site may become vulnerable to security issues if updates are not applied.', 'complete-updates-manager'); ?>
+            </p>
+            <p>
+                <?php esc_html_e('We strongly recommend:', 'complete-updates-manager'); ?>
+            </p>
+            <ul style="list-style: disc; margin-left: 20px;">
+                <li><?php esc_html_e('Enable security monitoring in plugin settings', 'complete-updates-manager'); ?></li>
+                <li><?php esc_html_e('Regularly check for critical security updates', 'complete-updates-manager'); ?></li>
+                <li><?php esc_html_e('Consider selective disabling instead of blocking all updates', 'complete-updates-manager'); ?></li>
+            </ul>
+            <p>
+                <a href="<?php echo esc_url(wum_get_settings_url()); ?>" class="button button-primary">
+                    <?php esc_html_e('Configure Settings', 'complete-updates-manager'); ?>
+                </a>
+                <a href="<?php echo esc_url($dismiss_url); ?>" class="button">
+                    <?php esc_html_e('I Understand, Dismiss', 'complete-updates-manager'); ?>
+                </a>
+            </p>
+        </div>
+        <?php
     }
 
     /**
