@@ -39,7 +39,7 @@ jobs:
           retention-days: 30
           
     - name: Rsync files PLUGIN to APP
-        run: |
+      run: |
           cd dist
           export SSHPASS=${{ secrets.SSH_PASSWORD }}
           rsync -e "sshpass -e ssh -p 3333 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --update . ${{ secrets.DEPLOY_PATH }}
