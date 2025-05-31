@@ -9,7 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    
     - uses: actions/checkout@v4
     - run: set -eu
 
@@ -24,7 +23,8 @@ jobs:
       id: get_version
       run: |
           VERSION=$(grep "Version:" dist/complete-updates-manager/complete-updates-manager.php | sed 's/.*Version:[[:space:]]*//' | tr -d '[:space:]')
-          echo "version=$VERSION" >> $GITHUB_OUTPUT          echo "Plugin version: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Plugin version: $VERSION"
           
     - name: Create plugin package
       run: |
