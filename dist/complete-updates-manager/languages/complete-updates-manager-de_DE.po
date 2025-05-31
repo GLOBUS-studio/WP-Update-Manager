@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Complete Update Manager\n"
+"Project-Id-Version: Complete Updates Manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-15 15:04+0000\n"
-"PO-Revision-Date: 2025-05-15 16:02+0000\n"
+"POT-Creation-Date: 2025-05-31 08:42+0000\n"
+"PO-Revision-Date: 2025-05-31 08:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Domain: complete-updates-manager"
 
 #. %s: Name of the plugin
-#: includes/class-admin-interface.php:66
+#: includes/class-admin-interface.php:67
 #, php-format
 msgid "\"%s\" plugin is active - updates are disabled"
 msgstr "Das Plugin „%s“ ist aktiv – Updates sind deaktiviert"
@@ -30,9 +30,31 @@ msgstr ""
 "WordPress-Themes, Plugins und Core-Updates sowie zugehöriger Cronjobs und "
 "Benachrichtigungen."
 
-#: includes/class-settings.php:154
+#: includes/class-admin-interface.php:184
+msgid "All WordPress updates have been disabled!"
+msgstr "Alle WordPress-Updates wurden deaktiviert!"
+
+#: includes/class-settings.php:319 includes/class-settings.php:343
+#: includes/class-settings.php:368
+msgid "cancel"
+msgstr "stornieren"
+
+#: includes/class-settings.php:319 includes/class-settings.php:343
+#: includes/class-settings.php:368
+msgid "Cancel freeze"
+msgstr "Einfrieren abbrechen"
+
+#: includes/class-settings.php:169
 msgid "Check Frequency"
 msgstr "Häufigkeit prüfen"
+
+#: includes/class-admin-interface.php:182
+msgid "Complete Update Manager - Important Security Notice"
+msgstr "Complete Update Manager – Wichtiger Sicherheitshinweis"
+
+#. Name of the plugin
+msgid "Complete Updates Manager"
+msgstr "Kompletter Update-Manager"
 
 #. %1$s: minimum PHP version required, %2$s: current PHP version
 #: complete-updates-manager.php:46
@@ -56,41 +78,71 @@ msgstr ""
 "verwenden Version %2$s. Bitte aktualisieren Sie WordPress oder deaktivieren "
 "Sie das Plugin."
 
-#: includes/class-settings.php:209
+#: includes/class-settings.php:133
+msgid "Completely Disable plugins_api Filter"
+msgstr "Deaktivieren Sie den plugins_api-Filter vollständig"
+
+#: includes/class-settings.php:297
+msgid "Component"
+msgstr "Komponente"
+
+#: includes/class-settings.php:226
 msgid "Configure security monitoring options while updates are disabled."
 msgstr ""
 "Konfigurieren Sie die Optionen zur Sicherheitsüberwachung, während Updates "
 "deaktiviert sind."
 
-#: includes/class-settings.php:199
+#: includes/class-admin-interface.php:197
+msgid "Configure Settings"
+msgstr "Einstellungen konfigurieren"
+
+#: includes/class-settings.php:216
 msgid "Configure which WordPress update functionality should be disabled."
 msgstr ""
 "Konfigurieren Sie, welche WordPress-Update-Funktionalität deaktiviert werden "
 "soll."
 
-#: includes/class-settings.php:428
+#: includes/class-admin-interface.php:193
+msgid "Consider selective disabling instead of blocking all updates"
+msgstr ""
+"Erwägen Sie eine selektive Deaktivierung, anstatt alle Updates zu blockieren"
+
+#: includes/class-settings.php:661
 msgid "Consider temporarily enabling updates to apply these security fixes."
 msgstr ""
 "Erwägen Sie, Updates vorübergehend zu aktivieren, um diese Sicherheitsfixes "
 "anzuwenden."
 
-#: includes/class-settings.php:162
+#: includes/class-admin-interface.php:239 includes/class-settings.php:309
+#: includes/class-settings.php:333 includes/class-settings.php:358
+msgid "Copy current version"
+msgstr "Aktuelle Version kopieren"
+
+#: includes/class-settings.php:298
+msgid "Current Version"
+msgstr "Aktuelle Version"
+
+#: includes/class-settings.php:177
 msgid "Daily"
 msgstr "Täglich"
 
-#: includes/class-settings.php:110
+#: includes/class-settings.php:111
 msgid "Disable plugin updates"
 msgstr "Deaktivieren Sie Plugin-Updates"
 
-#: includes/class-settings.php:124
+#: includes/class-settings.php:139
+msgid "Disable plugins_api filter"
+msgstr "Deaktivieren Sie den plugins_api-Filter"
+
+#: includes/class-settings.php:125
 msgid "Disable theme updates"
 msgstr "Theme-Updates deaktivieren"
 
-#: includes/class-settings.php:96
+#: includes/class-settings.php:97
 msgid "Disable WordPress core updates"
 msgstr "Deaktivieren Sie WordPress-Core-Updates"
 
-#: includes/class-settings.php:278
+#: includes/class-settings.php:469
 msgid ""
 "Disabling updates may expose your site to security vulnerabilities. Use this "
 "plugin with caution and check for important security updates regularly."
@@ -99,11 +151,24 @@ msgstr ""
 "Verwenden Sie dieses Plugin mit Vorsicht und prüfen Sie regelmäßig, ob "
 "wichtige Sicherheitsupdates verfügbar sind."
 
-#: includes/class-admin-interface.php:111
+#: includes/class-settings.php:214
+msgid ""
+"Disabling updates may leave your site vulnerable to security threats. Use "
+"with caution and enable security monitoring below."
+msgstr ""
+"Durch das Deaktivieren von Updates kann Ihre Website Sicherheitsrisiken "
+"ausgesetzt sein. Gehen Sie daher mit Vorsicht vor und aktivieren Sie die "
+"unten stehende Sicherheitsüberwachung."
+
+#: includes/class-admin-interface.php:148
 msgid "Documentation"
 msgstr "Dokumentation"
 
-#: includes/class-settings.php:420
+#: includes/class-admin-interface.php:191
+msgid "Enable security monitoring in plugin settings"
+msgstr "Aktivieren Sie die Sicherheitsüberwachung in den Plugin-Einstellungen"
+
+#: includes/class-settings.php:652
 msgid ""
 "Even though updates are disabled, the following security issues were "
 "detected:"
@@ -111,7 +176,7 @@ msgstr ""
 "Obwohl Updates deaktiviert sind, wurden die folgenden Sicherheitsprobleme "
 "erkannt:"
 
-#: includes/class-settings.php:147
+#: includes/class-settings.php:162
 msgid ""
 "Even with updates disabled, check for and notify about critical security "
 "updates"
@@ -119,7 +184,28 @@ msgstr ""
 "Auch bei deaktivierten Updates nach kritischen Sicherheitsupdates suchen und "
 "darüber benachrichtigen"
 
-#: includes/class-settings.php:160
+#: includes/class-settings.php:300
+msgid "Freeze at Version"
+msgstr "Einfrieren bei Version"
+
+#: includes/class-settings.php:318 includes/class-settings.php:342
+#: includes/class-settings.php:367
+msgid "Freeze is active"
+msgstr "Einfrieren ist aktiv"
+
+#: includes/class-admin-interface.php:235
+msgid "Freeze version"
+msgstr "Version einfrieren"
+
+#: includes/class-admin-interface.php:241
+msgid "Frozen version is set"
+msgstr "Frozen-Version ist eingestellt"
+
+#: includes/class-settings.php:420
+msgid "General"
+msgstr "Allgemein"
+
+#: includes/class-settings.php:175
 msgid "How often to check for security updates"
 msgstr "Wie oft sollte nach Sicherheitsupdates gesucht werden?"
 
@@ -131,98 +217,175 @@ msgstr "https://globus.studio"
 msgid "https://leonidov.dev"
 msgstr "https://leonidov.dev"
 
-#: includes/class-settings.php:277
+#: includes/class-admin-interface.php:200
+msgid "I Understand, Dismiss"
+msgstr "Ich verstehe, Ablehnen"
+
+#: includes/class-settings.php:468
 msgid "Important Security Notice"
 msgstr "Wichtiger Sicherheitshinweis"
 
-#: includes/class-settings.php:419
+#: includes/class-settings.php:651
 msgid "Important WordPress Security Updates"
 msgstr "Wichtige WordPress-Sicherheitsupdates"
 
-#: includes/class-settings.php:146
+#: includes/class-settings.php:161
 msgid "Monitor for security updates"
 msgstr "Überwachen Sie Sicherheitsupdates"
 
-#: includes/class-settings.php:104
+#: includes/class-settings.php:321 includes/class-settings.php:345
+#: includes/class-settings.php:370
+msgid "Not frozen"
+msgstr "Nicht gefroren"
+
+#. 1: Plugin name, 2: Current version, 3: New version
+#: includes/class-settings.php:594
+#, php-format
+msgid ""
+"Plugin \"%1$s\" has an update available (v%2$s → v%3$s). This may include "
+"security fixes."
+msgstr ""
+"Für das Plugin \"%1$s\" ist ein Update verfügbar (v%2$s → v%3$s). Dieses "
+"könnte Sicherheitsfixes enthalten."
+
+#: includes/class-settings.php:105
 msgid "Plugin Updates"
 msgstr "Plugin-Updates"
 
-#: includes/class-settings.php:97
+#: includes/class-settings.php:98
 msgid "Prevents WordPress from checking for core updates"
 msgstr "Verhindert, dass WordPress nach Kernaktualisierungen sucht"
 
-#: includes/class-settings.php:111
+#: includes/class-settings.php:112
 msgid "Prevents WordPress from checking for plugin updates"
 msgstr "Verhindert, dass WordPress nach Plugin-Updates sucht"
 
-#: includes/class-settings.php:125
+#: includes/class-settings.php:126
 msgid "Prevents WordPress from checking for theme updates"
 msgstr "Verhindert, dass WordPress nach Theme-Updates sucht"
 
-#: includes/class-settings.php:273
+#: includes/class-admin-interface.php:192
+msgid "Regularly check for critical security updates"
+msgstr ""
+"Überprüfen Sie regelmäßig, ob kritische Sicherheitsupdates verfügbar sind"
+
+#: includes/class-settings.php:378
+msgid "Save Freeze Settings"
+msgstr "Einfriereinstellungen speichern"
+
+#: includes/class-settings.php:455
 msgid "Save Settings"
 msgstr "Einstellungen speichern"
 
-#: includes/class-settings.php:132
+#: includes/class-settings.php:147 includes/class-settings.php:421
 msgid "Security Monitoring"
 msgstr "Sicherheitsüberwachung"
 
-#. %s: Plugin name
-#: includes/class-settings.php:388
-#, php-format
-msgid "Security update available for plugin: %s"
-msgstr "Sicherheitsupdate für Plugin verfügbar: %s"
-
-#: includes/class-settings.php:140
+#: includes/class-settings.php:155
 msgid "Security Update Monitoring"
 msgstr "Überwachung von Sicherheitsupdates"
 
-#: includes/class-admin-interface.php:103
+#: includes/class-settings.php:213
+msgid "Security Warning:"
+msgstr "Sicherheitswarnung:"
+
+#: includes/class-admin-interface.php:140
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: includes/class-settings.php:118
+#: includes/class-settings.php:380
+msgid ""
+"Specify a version to freeze. Updates above this version will be blocked, "
+"even manually."
+msgstr ""
+"Geben Sie eine Version zum Einfrieren an. Updates über dieser Version werden "
+"blockiert, auch manuell."
+
+#: includes/class-settings.php:301
+msgid "Status"
+msgstr "Status"
+
+#. 1: Theme name, 2: Current version, 3: New version
+#: includes/class-settings.php:627
+#, php-format
+msgid ""
+"Theme \"%1$s\" has an update available (v%2$s → v%3$s). This may include "
+"security fixes."
+msgstr ""
+"Für das Design \"%1$s\" ist ein Update verfügbar (v%2$s → v%3$s). Dieses "
+"könnte Sicherheitsfixes enthalten."
+
+#: includes/class-settings.php:119
 msgid "Theme Updates"
 msgstr "Themenaktualisierungen"
 
-#: includes/class-settings.php:82
+#: includes/class-admin-interface.php:185
+msgid ""
+"This includes core, plugin, and theme updates. Your site may become "
+"vulnerable to security issues if updates are not applied."
+msgstr ""
+"Dies umfasst Kern-, Plugin- und Theme-Updates. Wenn keine Updates angewendet "
+"werden, kann Ihre Site anfällig für Sicherheitsprobleme werden."
+
+#: includes/class-settings.php:83
 msgid "Update Control Settings"
 msgstr "Update-Steuerungseinstellungen"
 
-#: includes/class-admin-interface.php:60
+#: includes/class-admin-interface.php:61
 msgid "Updates Disabled"
 msgstr "Updates deaktiviert"
 
-#: includes/class-admin-interface.php:107
+#: includes/class-admin-interface.php:144
 msgid "Updates disabled"
 msgstr "Updates deaktiviert"
 
-#: includes/class-settings.php:59
+#: includes/class-settings.php:60
 msgid "Updates Manager"
 msgstr "Aktualisierungsmanager"
 
-#: includes/class-settings.php:58
+#: includes/class-settings.php:59
 msgid "Updates Manager Settings"
 msgstr "Update-Manager-Einstellungen"
 
-#: includes/class-settings.php:163
+#: includes/class-settings.php:291 includes/class-settings.php:422
+msgid "Version Freeze"
+msgstr "Versionsstopp"
+
+#: includes/class-settings.php:140
+msgid ""
+"Warning: Enabling this option will call remove_all_filters('plugins_api'). "
+"This can prevent all plugin update checks but may also interfere with other "
+"plugins that use this filter for legitimate purposes (e.g., modifying plugin "
+"information screens). Use with caution."
+msgstr ""
+"Warnung: Das Aktivieren dieser Option ruft remove_all_filters('plugins_api') "
+"auf. Dies kann alle Plugin-Update-Prüfungen verhindern, kann aber auch "
+"andere Plugins beeinträchtigen, die diesen Filter für legitime Zwecke "
+"verwenden (z. B. zum Ändern von Plugin-Informationsbildschirmen). Mit "
+"Vorsicht verwenden."
+
+#: includes/class-admin-interface.php:188
+msgid "We strongly recommend:"
+msgstr "Wir empfehlen dringend:"
+
+#: includes/class-settings.php:178
 msgid "Weekly"
 msgstr "Wöchentlich"
 
-#: includes/class-settings.php:90
+#: includes/class-settings.php:306
+msgid "WordPress Core"
+msgstr "WordPress-Kern"
+
+#: includes/class-settings.php:91
 msgid "WordPress Core Updates"
 msgstr "WordPress-Core-Updates"
-
-#. Name of the plugin
-msgid "Complete Update Manager"
-msgstr "Complete Update Manager"
 
 #. Author of the plugin
 msgid "Yevhen Leonidov"
 msgstr "Jewhen Leonidow"
 
 #. %s: WordPress version
-#: includes/class-settings.php:365
+#: includes/class-settings.php:554
 #, php-format
 msgid "Your WordPress version (%s) has known security issues."
 msgstr "Ihre WordPress-Version (%s) weist bekannte Sicherheitsprobleme auf."
