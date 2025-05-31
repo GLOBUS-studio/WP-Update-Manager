@@ -225,68 +225,98 @@ class Complete_Updates_Manager {
      * @return object            Modified transient value
      */
     public function override_version_check($transient) {
+        global $wp_version; // Ensure $wp_version is available if needed later.
+
         $current_filter = current_filter();
-        
-        // Skip if monitoring security updates and this is a core update check
-        if ($this->settings['monitor_security_updates'] && 
-            (strpos($current_filter, 'update_core') !== false)) {
-            return $transient;
-        }
-        
-        // Skip based on settings
-        if (strpos($current_filter, 'update_themes') !== false && !$this->settings['disable_theme_updates']) {
-            return $transient;
-        }
-        
-        if (strpos($current_filter, 'update_plugins') !== false && !$this->settings['disable_plugin_updates']) {
-            return $transient;
-        }
-        
-        if (strpos($current_filter, 'update_core') !== false && !$this->settings['disable_core_updates']) {
-            return $transient;
-        }
-        
-        // Include WordPress version information file
-        include ABSPATH . WPINC . '/version.php';
-        
-        // Create object with empty update data
-        $current = new stdClass;
-        $current->updates = []; // Empty updates array
-        $current->version_checked = $wp_version;
-        $current->last_checked = time();
-        
-        // Version freeze logic for core
-        if (strpos($current_filter, 'update_core') !== false && !empty($transient->updates)) {
-            $frozen = function_exists('wum_get_frozen_version') ? wum_get_frozen_version('core') : null;
-            if ($frozen) {
-                foreach ($transient->updates as $k => $update) {
-                    if (isset($update->current) && version_compare($update->current, $frozen, '>')) {
-                        unset($transient->updates[$k]);
+
+        // --- 1. Apply Version Freeze logic to $transient ---
+        // This modifies $transient directly by unsetting updates that are newer than frozen versions.
+        if (function_exists('wum_get_frozen_version')) {
+            // Core Version Freeze
+            if (strpos($current_filter, 'update_core') !== false && isset($transient->updates) && is_array($transient->updates)) {
+                $frozen_core_v = wum_get_frozen_version('core');
+                if ($frozen_core_v) {
+                    foreach ($transient->updates as $k => $update_obj) {
+                        if (is_object($update_obj)) {
+                            $update_version_to_check = '';
+                            if (isset($update_obj->version)) {
+                                $update_version_to_check = $update_obj->version;
+                            } elseif (isset($update_obj->current)) { // Fallback for older structures
+                                $update_version_to_check = $update_obj->current;
+                            }
+                            
+                            if ($update_version_to_check && version_compare($update_version_to_check, $frozen_core_v, '>')) {
+                                unset($transient->updates[$k]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Plugin Version Freeze
+            if (strpos($current_filter, 'update_plugins') !== false && isset($transient->response) && is_array($transient->response)) {
+                foreach ($transient->response as $plugin_file => $plugin_update_data) {
+                    if (is_object($plugin_update_data)) {
+                        $frozen_plugin_v = wum_get_frozen_version('plugin', $plugin_file);
+                        if ($frozen_plugin_v && isset($plugin_update_data->new_version) && version_compare($plugin_update_data->new_version, $frozen_plugin_v, '>')) {
+                            unset($transient->response[$plugin_file]);
+                        }
+                    }
+                }
+            }
+
+            // Theme Version Freeze
+            if (strpos($current_filter, 'update_themes') !== false && isset($transient->response) && is_array($transient->response)) {
+                foreach ($transient->response as $theme_slug => $theme_update_data) {
+                    if (is_object($theme_update_data)) {
+                        $frozen_theme_v = wum_get_frozen_version('theme', $theme_slug);
+                        if ($frozen_theme_v && isset($theme_update_data->new_version) && version_compare($theme_update_data->new_version, $frozen_theme_v, '>')) {
+                            unset($transient->response[$theme_slug]);
+                        }
                     }
                 }
             }
         }
-        // Version freeze logic for plugins
-        if (strpos($current_filter, 'update_plugins') !== false && !empty($transient->response)) {
-            foreach ($transient->response as $plugin_file => $update) {
-                $frozen = function_exists('wum_get_frozen_version') ? wum_get_frozen_version('plugin', $plugin_file) : null;
-                if ($frozen && isset($update->new_version) && version_compare($update->new_version, $frozen, '>')) {
-                    unset($transient->response[$plugin_file]);
-                }
-            }
+
+        // --- 2. Handle security monitoring for core ---
+        // If monitoring security updates for core, return the $transient (which has now been processed by Version Freeze).
+        if (!empty($this->settings['monitor_security_updates']) && (strpos($current_filter, 'update_core') !== false)) {
+            return $transient;
         }
-        // Version freeze logic for themes
-        if (strpos($current_filter, 'update_themes') !== false && !empty($transient->response)) {
-            foreach ($transient->response as $theme_slug => $update) {
-                $frozen = function_exists('wum_get_frozen_version') ? wum_get_frozen_version('theme', $theme_slug) : null;
-                if ($frozen && isset($update->new_version) && version_compare($update->new_version, $frozen, '>')) {
-                    unset($transient->response[$theme_slug]);
-                }
-            }
+
+        // --- 3. Handle global disable settings ---
+        // Determine if an empty transient should be returned based on global settings.
+        $return_empty_transient_flag = false;
+        if (strpos($current_filter, 'update_themes') !== false && !empty($this->settings['disable_theme_updates'])) {
+            $return_empty_transient_flag = true;
+        } elseif (strpos($current_filter, 'update_plugins') !== false && !empty($this->settings['disable_plugin_updates'])) {
+            $return_empty_transient_flag = true;
+        } elseif (strpos($current_filter, 'update_core') !== false && !empty($this->settings['disable_core_updates'])) {
+            // This condition is met if core updates are globally disabled AND security monitoring for core is OFF
+            $return_empty_transient_flag = true;
         }
-        
-        // Return modified object
-        return $current;
+
+        if ($return_empty_transient_flag) {
+            $empty_transient_obj = new stdClass;
+            $empty_transient_obj->last_checked = time();
+
+            if (strpos($current_filter, 'update_core') !== false) {
+                if (!isset($wp_version)) { // $wp_version is needed for core's version_checked
+                     include_once ABSPATH . WPINC . '/version.php';
+                }
+                $empty_transient_obj->version_checked = isset($wp_version) ? $wp_version : '';
+                $empty_transient_obj->updates = [];
+                $empty_transient_obj->response = 'latest'; // Standard for no core updates
+            } else { // Plugins or Themes
+                $empty_transient_obj->response = [];
+                $empty_transient_obj->translations = [];
+            }
+            return $empty_transient_obj;
+        }
+
+        // --- 4. If not returned yet, updates for this type are generally enabled ---
+        // Return the $transient, which has been processed by Version Freeze and not overridden by global disables.
+        return $transient;
     }
     
     /**
