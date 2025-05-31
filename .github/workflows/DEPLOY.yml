@@ -17,7 +17,9 @@ jobs:
 
       - run: mkdir -p "$HOME/.ssh"
       - run: echo "${{ secrets.GSS }}" > "$HOME/.ssh/key"
-      - run: chmod 600 "$HOME/.ssh/key"      - name: Extract plugin version
+      - run: chmod 600 "$HOME/.ssh/key"      
+      
+      - name: Extract plugin version
         id: get_version
         run: |
           VERSION=$(grep "Version:" dist/complete-updates-manager/complete-updates-manager.php | sed 's/.*Version:[[:space:]]*//' | tr -d '[:space:]')
