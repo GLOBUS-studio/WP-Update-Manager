@@ -19,20 +19,23 @@ jobs:
 
     - run: mkdir -p "$HOME/.ssh"
     - run: echo "${{ secrets.GSS }}" > "$HOME/.ssh/key"
-    - run: chmod 600 "$HOME/.ssh/key"      
-      
+    - run: chmod 600 "$HOME/.ssh/key"
+    
     - name: Extract plugin version
       id: get_version
       run: |
           VERSION=$(grep "Version:" dist/complete-updates-manager/complete-updates-manager.php | sed 's/.*Version:[[:space:]]*//' | tr -d '[:space:]')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Plugin version: $VERSION"
-
+          
     - name: Create plugin package
       run: |
           cd dist
           zip -r ../complete-updates-manager-${{ steps.get_version.outputs.version }}.zip complete-updates-manager/
-          ls -la ../complete-updates-manager-*.zip      - name: Upload plugin package as artifact
+          ls -la ../complete-updates-manager-*.zip
+
+    - name: Upload plugin package as artifact
+      uses: actions/upload-artifact@v4
       with:
           name: complete-updates-manager-${{ steps.get_version.outputs.version }}
           path: complete-updates-manager-${{ steps.get_version.outputs.version }}.zip
