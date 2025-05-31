@@ -381,15 +381,14 @@ class Complete_Updates_Manager {
 
         // Always treat the install as being under version control (disables auto-updates)
         add_filter('automatic_updates_is_vcs_checkout', '__return_true');
-
-        // (Typo: extra space in filter name) Attempt to disable debug email messages for automatic updates with priority 1
-        add_filter('automatic_updates_send_debug_email ', '__return_false', 1);
         
         // Remove scheduled update check actions
         remove_action('init', 'wp_schedule_update_checks');
         
-        // Remove all plugin API filters (prevents plugin update checks)
-        remove_all_filters('plugins_api');
+        // Conditionally remove all plugin API filters (prevents plugin update checks)
+        if (!empty($this->settings['disable_plugins_api_filter'])) {
+            remove_all_filters('plugins_api');
+        }
     }
 
     /**

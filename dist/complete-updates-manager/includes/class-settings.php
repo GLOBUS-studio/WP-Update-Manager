@@ -25,6 +25,7 @@ class Complete_Updates_Manager_Settings {
         'disable_theme_updates' => 1,
         'monitor_security_updates' => 0,
         'security_check_interval' => 'daily',
+        'disable_plugins_api_filter' => 0, // New setting
     ];
 
     /**
@@ -126,6 +127,20 @@ class Complete_Updates_Manager_Settings {
             ]
         );
 
+        // Disable plugins_api filter Setting
+        add_settings_field(
+            'disable_plugins_api_filter',
+            __('Completely Disable plugins_api Filter', 'complete-updates-manager'),
+            [$this, 'render_checkbox_field'],
+            'complete-updates-manager',
+            'wum_general_section',
+            [
+                'id' => 'disable_plugins_api_filter',
+                'label' => __('Disable plugins_api filter', 'complete-updates-manager'),
+                'description' => __('Warning: Enabling this option will call remove_all_filters(\'plugins_api\'). This can prevent all plugin update checks but may also interfere with other plugins that use this filter for legitimate purposes (e.g., modifying plugin information screens). Use with caution.', 'complete-updates-manager')
+            ]
+        );
+
         // Security Monitoring Section
         add_settings_section(
             'wum_security_section',
@@ -176,7 +191,7 @@ class Complete_Updates_Manager_Settings {
         $sanitized = [];
         
         // Sanitize checkboxes (0 or 1)
-        $checkboxes = ['disable_core_updates', 'disable_plugin_updates', 'disable_theme_updates', 'monitor_security_updates'];
+        $checkboxes = ['disable_core_updates', 'disable_plugin_updates', 'disable_theme_updates', 'monitor_security_updates', 'disable_plugins_api_filter'];
         foreach ($checkboxes as $checkbox) {
             $sanitized[$checkbox] = isset($input[$checkbox]) ? 1 : 0;
         }
