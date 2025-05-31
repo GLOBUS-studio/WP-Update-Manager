@@ -1,0 +1,80 @@
+name: DEPLOY
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: set -eu
+
+    - name: Install sshpass
+      run: sudo apt-get install -y sshpass
+
+    - run: mkdir -p "$HOME/.ssh"
+    - run: echo "${{ secrets.GSS }}" > "$HOME/.ssh/key"
+    - run: chmod 600 "$HOME/.ssh/key"
+    
+    - name: Extract plugin version
+      id: get_version
+      run: |
+          VERSION=$(grep "Version:" dist/complete-updates-manager/complete-updates-manager.php | sed 's/.*Version:[[:space:]]*//' | tr -d '[:space:]')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Plugin version: $VERSION"
+          
+    - name: Create plugin package
+      run: |
+          cd dist
+          zip -r ../complete-updates-manager-${{ steps.get_version.outputs.version }}.zip complete-updates-manager/
+          ls -la ../complete-updates-manager-*.zip
+
+    - name: Upload plugin package as artifact
+      uses: actions/upload-artifact@v4
+      with:
+          name: complete-updates-manager-${{ steps.get_version.outputs.version }}
+          path: complete-updates-manager-${{ steps.get_version.outputs.version }}.zip
+          retention-days: 30
+    
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          tag_name: v${{ steps.get_version.outputs.version }}
+          release_name: Complete Updates Manager v${{ steps.get_version.outputs.version }}
+          draft: false
+          prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: complete-updates-manager-${{ steps.get_version.outputs.version }}.zip
+          asset_name: complete-updates-manager-${{ steps.get_version.outputs.version }}.zip
+          asset_content_type: application/zip
+          
+    - name: Rsync files PLUGIN to APP
+      run: |
+          cd dist
+          export SSHPASS=${{ secrets.SSH_PASSWORD }}
+          rsync -e "sshpass -e ssh -p 3333 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --update . ${{ secrets.DEPLOY_PATH }}
+
+    - name: Send success message to Telegram
+      if: success()
+      run: |
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+                  -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+                  -d text="🟢 $GITHUB_REPOSITORY [${{ github.event.pusher.name }}] - OK"
+    - name: Send error message to Telegram
+      if: failure()
+      run: |
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d text="🔴 $GITHUB_REPOSITORY [${{ github.event.pusher.name }}] - ERROR"
