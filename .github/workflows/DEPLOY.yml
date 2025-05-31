@@ -11,6 +11,7 @@ jobs:
     steps:      
     
     - uses: actions/checkout@v4
+    - uses: actions/upload-artifact@v4
     - run: set -eu
 
     - name: Install sshpass
@@ -32,7 +33,6 @@ jobs:
           cd dist
           zip -r ../complete-updates-manager-${{ steps.get_version.outputs.version }}.zip complete-updates-manager/
           ls -la ../complete-updates-manager-*.zip      - name: Upload plugin package as artifact
-      uses: actions/upload-artifact@v4
       with:
           name: complete-updates-manager-${{ steps.get_version.outputs.version }}
           path: complete-updates-manager-${{ steps.get_version.outputs.version }}.zip
