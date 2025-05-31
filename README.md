@@ -1,37 +1,37 @@
 ## 📦 WP Update Manager – Disable All WordPress Updates with Full Control
 
-**WP Update Manager** is the ultimate solution for disabling **WordPress core, plugin, and theme updates** — including automatic checks, cronjobs, and nag notifications. Whether you're managing a high-stability site, a client installation, or a customized environment, this plugin gives you **granular control** over update behavior without touching a single line of code.
+Advanced tool to fully disable WordPress theme, plugin and core update checking, related cronjobs and notifications with customization options.
 
-### ✅ Why Use WP Update Manager?
+The Complete Update Manager plugin provides a robust solution to disable the WordPress update checking system. It prevents WordPress from checking for updates including cronjobs, and suppresses all update-related notifications in the admin area.
 
-By default, WordPress constantly checks for updates to the core, themes, and plugins. While this is useful for many sites, some scenarios demand **fixed, stable environments** — such as white-labeled projects, custom development, or legacy support.
+### ✅ Why Use this plugin?
 
-WP Update Manager disables all update mechanisms and suppresses admin notices, giving you a **cleaner dashboard**, reduced load on admin pages, and zero unexpected updates.
+Some scenarios demand **fixed, stable environments** — such as white-labeled projects, custom development, or legacy support.
+
+This plugin disables all update mechanisms and suppresses admin notices, giving you a **cleaner dashboard**, reduced load on admin pages, and zero unexpected updates.
 
 ---
 
 ### 🧩 Key Features
 
-* 🔒 **Disable WordPress Core Updates** — Avoid major version changes without your approval
-* 🔌 **Block Plugin Update Checks** — No more plugin update prompts
-* 🎨 **Prevent Theme Update Notifications** — Preserve custom themes from unintentional overwrites
-* 🛑 **Stop Update-Related Cron Jobs** — Reduce background update activity
-* 📉 **Clean Site Health Screen** — Remove update alerts from Health Check
-* 🔕 **Silence Notification Emails** — No more automatic update emails cluttering your inbox
-* 🛠 **Admin Bar Status Icon** — Quick visual cue that updates are currently disabled
-* ⚙️ **Configurable Settings Page** — Selectively disable updates (core, themes, plugins)
-* 🧭 **Optional Security Monitoring** — Stay informed about critical vulnerabilities while disabling regular updates
+* 🔒 **Completely disables WordPress core updates** — Avoid major version changes without your approval
+* 🔌 **Prevents plugin update checks and notifications** — No more plugin update prompts
+* 🎨 **Blocks theme update checks and notifications** — Preserve custom themes from unintentional overwrites
+* 🛑 **Removes update-related items from Site Health screen** — Clean Site Health interface
+* 📡 **Blocks update requests to WordPress API servers** — Reduce background requests
+* 📧 **Disables all automatic update email notifications** — No more update emails cluttering your inbox
+* 📊 **Includes admin bar notification showing that updates are disabled** — Quick visual status indicator
+* ⚙️ **Configurable settings page to customize which updates to disable** — Selectively control core, themes, plugins
+* 🔍 **Security monitoring option for critical updates** — Stay informed about vulnerabilities even when updates are disabled
+* 🔒 **Version Freeze** — Freeze WordPress core, plugin, or theme at a specific version. Updates above this version are blocked, even manual ones. Manage freeze settings in a dedicated tab on the plugin settings page
 
 ---
 
-### ⚠️ Important Security Note
+### ⚠️ Important Security Notice
 
-Disabling updates **increases the risk** of missing out on important security patches. That's why WP Update Manager includes a **Security Monitoring Mode** to help you:
+It's *critical* to keep your WordPress theme, core and plugins up to date when not using this plugin! If you don't, your site could become **vulnerable to security issues** or performance problems.
 
-* Get alerts about **critical security vulnerabilities**
-* Decide when to **temporarily enable updates** to patch your system safely
-
-Use with care — and never ignore long-term maintenance!
+We recommend using the security monitoring feature to stay informed about critical security updates even when regular updates are disabled. You can temporarily enable updates as needed.
 
 ---
 
