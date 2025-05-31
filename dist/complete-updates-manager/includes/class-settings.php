@@ -25,7 +25,7 @@ class Complete_Updates_Manager_Settings {
         'disable_theme_updates' => 1,
         'monitor_security_updates' => 0,
         'security_check_interval' => 'daily',
-        'disable_plugins_api_filter' => 0, // New setting
+        'disable_plugins_api_filter' => 0, 
     ];
 
     /**

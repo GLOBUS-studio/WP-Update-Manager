@@ -503,9 +503,6 @@ class Complete_Updates_Manager {
         remove_action('admin_init', 'wp_auto_update_core');
         wp_clear_scheduled_hook('wp_maybe_auto_update');
         
-        // Remove all plugin API filters to prevent update checks
-        remove_all_filters('plugins_api');
-        
         // Additionally: hide notifications about available core updates
         add_filter('pre_option_update_core', '__return_null');
         add_filter('pre_site_transient_update_core', '__return_null');
