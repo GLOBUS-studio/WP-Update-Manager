@@ -36,7 +36,9 @@ jobs:
       with:
           name: complete-updates-manager-${{ steps.get_version.outputs.version }}
           path: complete-updates-manager-${{ steps.get_version.outputs.version }}.zip
-          retention-days: 30    - name: Create GitHub Release
+          retention-days: 30    
+    
+    - name: Create GitHub Release
       id: create_release
       uses: actions/create-release@v1
       env:
