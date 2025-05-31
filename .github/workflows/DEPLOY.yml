@@ -31,14 +31,31 @@ jobs:
       run: |
           cd dist
           zip -r ../complete-updates-manager-${{ steps.get_version.outputs.version }}.zip complete-updates-manager/
-          ls -la ../complete-updates-manager-*.zip
-
-    - name: Upload plugin package as artifact
+          ls -la ../complete-updates-manager-*.zip    - name: Upload plugin package as artifact
       uses: actions/upload-artifact@v4
       with:
           name: complete-updates-manager-${{ steps.get_version.outputs.version }}
           path: complete-updates-manager-${{ steps.get_version.outputs.version }}.zip
-          retention-days: 30
+          retention-days: 30    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          tag_name: v${{ steps.get_version.outputs.version }}
+          release_name: Complete Updates Manager v${{ steps.get_version.outputs.version }}
+          draft: false
+          prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: complete-updates-manager-${{ steps.get_version.outputs.version }}.zip
+          asset_name: complete-updates-manager-${{ steps.get_version.outputs.version }}.zip
+          asset_content_type: application/zip
           
     - name: Rsync files PLUGIN to APP
       run: |
