@@ -1,0 +1,9 @@
+/* Complete Updates Manager - Hide update UI indicators */
+.update-plugins,
+.update-count,
+.plugin-count,
+.theme-count,
+.update-message,
+.updates-available {
+    display: none !important;
+}

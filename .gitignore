@@ -1,0 +1,43 @@
+# Operating System
+.DS_Store
+Thumbs.db
+*.bak
+*.swp
+*~
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# PHP
+vendor/
+composer.lock
+*.cache
+
+# Node
+node_modules/
+package-lock.json
+yarn.lock
+*.map
+
+# Build artifacts
+dist/complete-updates-manager/assets/*.min.css
+dist/complete-updates-manager/assets/*.min.js
+
+# WordPress
+.wordpress/
+wp-content/
+wp-config.php
+*.log
+error_log
+
+# Tests
+tests/.phpunit.result.cache
+coverage/
+reports/
+
+# OS
+Desktop.ini

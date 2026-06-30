@@ -1,0 +1,15 @@
+{
+    "name": "complete-updates-manager",
+    "private": true,
+    "scripts": {
+        "build:css": "cleancss -o dist/complete-updates-manager/assets/admin.min.css dist/complete-updates-manager/assets/admin.css",
+        "build:js": "terser dist/complete-updates-manager/assets/admin.js -o dist/complete-updates-manager/assets/admin.min.js -c -m",
+        "build": "npm run build:css && npm run build:js",
+        "watch": "onchange 'dist/complete-updates-manager/assets/*.css' 'dist/complete-updates-manager/assets/*.js' -- npm run build"
+    },
+    "devDependencies": {
+        "clean-css-cli": "^5.6",
+        "terser": "^5.31",
+        "onchange": "^7.1"
+    }
+}

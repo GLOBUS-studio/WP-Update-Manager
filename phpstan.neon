@@ -1,0 +1,26 @@
+parameters:
+    level: 5
+    parallel:
+        processTimeout: 300.0
+        maximumNumberOfProcesses: 1
+    paths:
+        - dist/complete-updates-manager/
+    excludePaths:
+        - dist/complete-updates-manager/languages/
+        - vendor/
+        - node_modules/
+        - tests/
+        - .wordpress/
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+        - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+    ignoreErrors:
+        # Action callbacks (override_version_check, filter_cron_events) also used as filters
+        - '#Action callback returns [a-z]+ but should not return anything#'
+        # False positive on empty() after get_plugin_data
+        - '#Variable \$plugin_data in empty\(\) always exists and is not falsy#'
+        - '#Result of \|\| is always false#'
+    universalObjectCratesClasses:
+        - WP_Post
+        - WP_Theme
+        - WP_Error

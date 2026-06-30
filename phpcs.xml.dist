@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<ruleset name="Complete Updates Manager">
+    <description>WordPress Coding Standards for Complete Updates Manager plugin</description>
+
+    <arg name="extensions" value="php"/>
+    <arg name="parallel" value="8"/>
+    <arg value="s"/>
+
+    <file>./dist/complete-updates-manager/</file>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/tests/*</exclude-pattern>
+    <exclude-pattern>*/languages/*</exclude-pattern>
+    <exclude-pattern>*/.wordpress/*</exclude-pattern>
+    <exclude-pattern>*/assets/*.min.css</exclude-pattern>
+    <exclude-pattern>*/assets/*.min.js</exclude-pattern>
+
+    <!-- WordPress-Extra includes Core, Docs, and Extra standards -->
+    <rule ref="WordPress-Extra"/>
+
+    <!-- PHP 7.4+ compatibility -->
+    <rule ref="PHPCompatibilityWP"/>
+    <config name="testVersion" value="7.4-"/>
+
+    <!-- Text domain -->
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="complete-updates-manager"/>
+            </property>
+        </properties>
+    </rule>
+
+    <!-- Line length -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="200"/>
+            <property name="absoluteLineLimit" value="350"/>
+        </properties>
+    </rule>
+
+    <!-- Exclude opinionated rules that don't affect code quality -->
+    <rule ref="Squiz.Commenting.InlineComment.InvalidEndChar">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FileComment.WrongStyle">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FileComment.Missing">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FileComment.MissingPackageTag">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.Missing">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.MissingParamComment">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.ParamCommentFullStop">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.Commenting.DocComment.MissingShort">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.PHP.YodaConditions.NotYoda">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.AssignmentInCondition.Found">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.Files.LineEndings.InvalidEOLChar">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PSR2.Files.EndFileNewline.NoneFound">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.Files.EndFileNewline.NotFound">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.PHP.DevelopmentFunctions.error_log_error_log">
+        <severity>0</severity>
+    </rule>
+    <rule ref="WordPress.PHP.DevelopmentFunctions.error_log_print_r">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Allow non-standard class file names (plugin uses class-*.php) -->
+    <rule ref="WordPress.Files.FileName.InvalidClassFileName">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="WordPress.WP.AlternativeFunctions.parse_url_parse_url">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="WordPress.PHP.StrictInArray.MissingTrueStrict">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="WordPress.Security.NonceVerification.Recommended">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Internal.LineEndings.Mixed">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Generic.Files.LineLength.TooLong">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Exclude stub files from PHPCompatibility checks -->
+    <rule ref="PHPCompatibilityWP">
+        <exclude-pattern>*/.wordpress/*</exclude-pattern>
+    </rule>
+</ruleset>

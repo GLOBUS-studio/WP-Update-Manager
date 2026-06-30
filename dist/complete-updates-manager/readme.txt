@@ -3,7 +3,7 @@ Tags: disable updates, update control, wordpress updates, plugins updates, theme
 Requires at least: 3.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,6 +66,18 @@ Go to Settings > Updates Manager in your WordPress admin panel to configure the 
 To temporarily check for updates, simply deactivate the plugin, check for updates, and then reactivate it.
 
 == Changelog ==
+
+= 1.0.2 =
+* Added uninstall.php cleanup handler
+* Extracted CSS/JS to external files (admin.css, admin.js)
+* Added 43 PHPUnit tests with Brain Monkey
+* Added dev tooling: composer.json, phpcs.xml.dist, phpstan.neon, package.json
+* Added CI pipeline via GitHub Actions (PHPCS + PHPUnit, PHP 7.4–8.3)
+* Full WPCS formatting reformat across all PHP files
+* Refactored render_freeze_version_field() to global helper
+* Refactored hide_update_ui() to enqueue external CSS
+* Added plugin action link for Documentation
+* Added .gitignore, AGENTS.md, README.md overhaul
 
 = 1.0.1 =
 * Added settings page under Settings menu

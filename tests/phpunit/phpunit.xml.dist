@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="bootstrap.php"
+         colors="true"
+         verbose="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         failOnWarning="true">
+
+    <testsuites>
+        <testsuite name="Complete Updates Manager Test Suite">
+            <directory suffix=".php">.</directory>
+            <exclude>bootstrap.php</exclude>
+        </testsuite>
+    </testsuites>
+
+    <coverage>
+        <include>
+            <directory suffix=".php">../../dist/complete-updates-manager/includes/</directory>
+            <file>../../dist/complete-updates-manager/uninstall.php</file>
+        </include>
+        <report>
+            <html outputDirectory="../../coverage"/>
+            <text outputFile="php://stdout"/>
+        </report>
+    </coverage>
+
+    <php>
+        <ini name="display_errors" value="On"/>
+        <ini name="error_reporting" value="E_ALL"/>
+    </php>
+</phpunit>
