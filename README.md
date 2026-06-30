@@ -1,10 +1,14 @@
-## 📦 WP Update Manager – Disable All WordPress Updates with Full Control
+# WP Update Manager
+
+[![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
+[![WordPress](https://img.shields.io/badge/WordPress-plugin-blue.svg)](https://wordpress.org/)
+[![PHP](https://img.shields.io/badge/PHP-%3E%3D7.4-777BB4.svg)](https://www.php.net/)
 
 Advanced tool to fully disable WordPress theme, plugin and core update checking, related cronjobs and notifications with customization options.
 
 The Complete Update Manager plugin provides a robust solution to disable the WordPress update checking system. It prevents WordPress from checking for updates including cronjobs, and suppresses all update-related notifications in the admin area.
 
-### ✅ Why Use this plugin?
+## Why Use This Plugin
 
 Some scenarios demand **fixed, stable environments** — such as white-labeled projects, custom development, or legacy support.
 
@@ -12,7 +16,7 @@ This plugin disables all update mechanisms and suppresses admin notices, giving 
 
 ---
 
-### 🧩 Key Features
+## Key Features
 
 * 🔒 **Completely disables WordPress core updates** — Avoid major version changes without your approval
 * 🔌 **Prevents plugin update checks and notifications** — No more plugin update prompts
@@ -27,7 +31,7 @@ This plugin disables all update mechanisms and suppresses admin notices, giving 
 
 ---
 
-### ⚠️ Important Security Notice
+## Important Security Notice
 
 It's *critical* to keep your WordPress theme, core and plugins up to date when not using this plugin! If you don't, your site could become **vulnerable to security issues** or performance problems.
 
@@ -35,7 +39,7 @@ We recommend using the security monitoring feature to stay informed about critic
 
 ---
 
-### 🧑‍💻 Who Should Use WP Update Manager?
+## Who Should Use WP Update Manager
 
 * Site owners who prefer **manual update control**
 * Agencies managing **client websites** with locked-down configurations
@@ -44,7 +48,7 @@ We recommend using the security monitoring feature to stay informed about critic
 
 ---
 
-### 🌐 Plugin Highlights
+## Plugin Highlights
 
 * 🏢 Compatible with **single-site and multisite**
 * 🧩 Lightweight, no bloat, no performance hit
@@ -53,7 +57,7 @@ We recommend using the security monitoring feature to stay informed about critic
 
 ---
 
-### 🔧 How to Use
+## Installation & Usage
 
 1. Install and activate the plugin
 2. Navigate to **Settings → Updates Manager**
@@ -70,3 +74,7 @@ Give yourself peace of mind and full control over your update workflow with **WP
 🔎 *Tags*: disable WordPress updates, block plugin updates, stop theme updates, update manager, no automatic updates, WP cron disable, WordPress admin notifications, secure WordPress site
 
 ---
+
+## License
+
+GPL-3.0. See [LICENSE](LICENSE).
